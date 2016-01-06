@@ -1,0 +1,43 @@
+From b49e42000d8c7d893b20bb6c159a8cbff9a41847 Mon Sep 17 00:00:00 2001
+From: Alberto Murillo <alberto.murillo.silva@intel.com>
+Date: Tue, 2 Feb 2016 13:35:39 -0600
+Subject: [PATCH] Fix tabs
+
+---
+ lib/ansible/modules/core/cloud/amazon/route53.py | 2 +-
+ lib/ansible/modules/extras/network/haproxy.py    | 6 +++---
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/lib/ansible/modules/core/cloud/amazon/route53.py b/lib/ansible/modules/core/cloud/amazon/route53.py
+index 72eac85..763ad3d 100644
+--- a/lib/ansible/modules/core/cloud/amazon/route53.py
++++ b/lib/ansible/modules/core/cloud/amazon/route53.py
+@@ -389,7 +389,7 @@ def main():
+         decoded_name = rset.name.replace(r'\052', '*')
+         decoded_name = decoded_name.replace(r'\100', '@')
+         #Need to save this changes in rset, because of comparing rset.to_xml() == wanted_rset.to_xml() in next block
+-	rset.name = decoded_name
++        rset.name = decoded_name
+ 
+         if rset.type == type_in and decoded_name.lower() == record_in.lower() and str(rset.identifier) == str(identifier_in):
+             found_record = True
+diff --git a/lib/ansible/modules/extras/network/haproxy.py b/lib/ansible/modules/extras/network/haproxy.py
+index 0fb4beb..4cc1c1c 100644
+--- a/lib/ansible/modules/extras/network/haproxy.py
++++ b/lib/ansible/modules/extras/network/haproxy.py
+@@ -312,9 +312,9 @@ class HAProxy(object):
+         Figure out what you want to do from ansible, and then do it.
+         """
+ 
+-	self.get_current_state(self.host, self.backend)
+-	self.previous_states = ','.join(self.status_server)
+-	self.previous_weights = ','.join(self.status_weight)
++        self.get_current_state(self.host, self.backend)
++        self.previous_states = ','.join(self.status_server)
++        self.previous_weights = ','.join(self.status_weight)
+ 
+         # toggle enable/disbale server
+         if self.state == 'enabled':
+-- 
+2.5.0
+
