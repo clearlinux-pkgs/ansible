@@ -1,0 +1,25 @@
+From f18a4c838ce6c929eec3690b620643b166694e60 Mon Sep 17 00:00:00 2001
+From: Alberto Murillo <alberto.murillo.silva@intel.com>
+Date: Mon, 25 Apr 2016 10:36:38 -0500
+Subject: [PATCH] no -tt
+
+---
+ lib/ansible/plugins/connection/ssh.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/lib/ansible/plugins/connection/ssh.py b/lib/ansible/plugins/connection/ssh.py
+index 37e4b13..90b28fb 100644
+--- a/lib/ansible/plugins/connection/ssh.py
++++ b/lib/ansible/plugins/connection/ssh.py
+@@ -560,7 +560,7 @@ class Connection(ConnectionBase):
+         # interactive-mode ("unexpected indent" mainly because of empty lines)
+ 
+         if not in_data and sudoable:
+-            args = ('ssh', '-tt', self.host, cmd)
++            args = ('ssh', self.host, cmd)
+         else:
+             args = ('ssh', self.host, cmd)
+ 
+-- 
+2.5.5
+
