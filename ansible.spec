@@ -4,7 +4,7 @@
 #
 Name     : ansible
 Version  : 2.0.2.0
-Release  : 16
+Release  : 17
 URL      : http://releases.ansible.com/ansible/ansible-2.0.2.0.tar.gz
 Source0  : http://releases.ansible.com/ansible/ansible-2.0.2.0.tar.gz
 Summary  : Radically simple IT automation
@@ -19,6 +19,7 @@ BuildRequires : setuptools
 Patch1: 0001-Fix-tabs.patch
 Patch2: 0001-Look-for-roles-in-usr.patch
 Patch3: 0001-no-sftp.patch
+Patch4: 0001-no-tt.patch
 
 %description
 Ansible is a radically simple model-driven configuration management,
@@ -48,6 +49,7 @@ python components for the ansible package.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 python2 setup.py build -b py2
@@ -58,7 +60,6 @@ python2 -tt setup.py build -b py2 install --root=%{buildroot}
 
 %files
 %defattr(-,root,root,-)
-/usr/lib
 
 %files bin
 %defattr(-,root,root,-)
