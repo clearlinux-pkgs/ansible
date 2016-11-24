@@ -4,7 +4,7 @@
 #
 Name     : ansible
 Version  : 2.2.0.0
-Release  : 25
+Release  : 26
 URL      : http://releases.ansible.com/ansible/ansible-2.2.0.0.tar.gz
 Source0  : http://releases.ansible.com/ansible/ansible-2.2.0.0.tar.gz
 Summary  : Radically simple IT automation
@@ -20,7 +20,8 @@ BuildRequires : pip
 BuildRequires : pycrypto
 BuildRequires : python-dev
 BuildRequires : setuptools
-Patch1: 0001-Look-for-roles-in-usr.patch
+Patch1: 0001-Fix-ssh-plugin-to-correctly-fetch-files-when-using-s.patch
+Patch2: 0001-Look-for-roles-in-usr.patch
 
 %description
 Ansible is a radically simple model-driven configuration management,
@@ -49,6 +50,7 @@ python components for the ansible package.
 %prep
 %setup -q -n ansible-2.2.0.0
 %patch1 -p1
+%patch2 -p1
 
 %build
 export LANG=C

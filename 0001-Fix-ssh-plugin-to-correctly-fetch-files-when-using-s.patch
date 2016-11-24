@@ -1,0 +1,44 @@
+From aa9dd97faba78e97e08e06ce65a15ade5995ace5 Mon Sep 17 00:00:00 2001
+From: Alberto Murillo Silva <alberto.murillo.silva@intel.com>
+Date: Thu, 24 Nov 2016 10:39:14 -0600
+Subject: [PATCH] Fix ssh plugin to correctly fetch files when using scp
+
+Fetch module uses fetch_file() from plugin/connection/ssh.py to
+retrieve files from the remote hosts which in turns uses
+_file_transport_command(self, in_path, out_path, sftp_action) being
+sftp_action = 'get'
+
+When using scp rather than sftp, sftp_action variable is not used
+and the scp command is formed in a way that the file is always
+sent to the remote machine
+
+This patch fixes _file_transport_command() to correctly form the scp
+swaping src and dest if sftp_action is 'get'
+
+Bug introduced at 8e47b9b
+Fixes #18603
+
+Signed-off-by: Alberto Murillo Silva <alberto.murillo.silva@intel.com>
+---
+ lib/ansible/plugins/connection/ssh.py | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/lib/ansible/plugins/connection/ssh.py b/lib/ansible/plugins/connection/ssh.py
+index f4a6e34..3aea04a 100644
+--- a/lib/ansible/plugins/connection/ssh.py
++++ b/lib/ansible/plugins/connection/ssh.py
+@@ -627,7 +627,10 @@ class Connection(ConnectionBase):
+                 cmd = self._build_command('sftp', to_bytes(host))
+                 in_data = u"{0} {1} {2}\n".format(sftp_action, pipes.quote(in_path), pipes.quote(out_path))
+             elif method == 'scp':
+-                cmd = self._build_command('scp', in_path, u'{0}:{1}'.format(host, pipes.quote(out_path)))
++                if sftp_action == 'get':
++                    cmd = self._build_command('scp', u'{0}:{1}'.format(host, pipes.quote(out_path)), in_path)
++                else:
++                    cmd = self._build_command('scp', in_path, u'{0}:{1}'.format(host, pipes.quote(out_path)))
+                 in_data = None
+ 
+             in_data = to_bytes(in_data, nonstring='passthru')
+-- 
+2.7.4
+
