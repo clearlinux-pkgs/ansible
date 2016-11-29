@@ -1,4 +1,4 @@
-From aa9dd97faba78e97e08e06ce65a15ade5995ace5 Mon Sep 17 00:00:00 2001
+From 3ae7722ef52ecf3151b00a0a14e8ae2114083999 Mon Sep 17 00:00:00 2001
 From: Alberto Murillo Silva <alberto.murillo.silva@intel.com>
 Date: Thu, 24 Nov 2016 10:39:14 -0600
 Subject: [PATCH] Fix ssh plugin to correctly fetch files when using scp
@@ -24,7 +24,7 @@ Signed-off-by: Alberto Murillo Silva <alberto.murillo.silva@intel.com>
  1 file changed, 4 insertions(+), 1 deletion(-)
 
 diff --git a/lib/ansible/plugins/connection/ssh.py b/lib/ansible/plugins/connection/ssh.py
-index f4a6e34..3aea04a 100644
+index f4a6e34..ebc3e29 100644
 --- a/lib/ansible/plugins/connection/ssh.py
 +++ b/lib/ansible/plugins/connection/ssh.py
 @@ -627,7 +627,10 @@ class Connection(ConnectionBase):
@@ -33,7 +33,7 @@ index f4a6e34..3aea04a 100644
              elif method == 'scp':
 -                cmd = self._build_command('scp', in_path, u'{0}:{1}'.format(host, pipes.quote(out_path)))
 +                if sftp_action == 'get':
-+                    cmd = self._build_command('scp', u'{0}:{1}'.format(host, pipes.quote(out_path)), in_path)
++                    cmd = self._build_command('scp', u'{0}:{1}'.format(host, pipes.quote(in_path)), out_path)
 +                else:
 +                    cmd = self._build_command('scp', in_path, u'{0}:{1}'.format(host, pipes.quote(out_path)))
                  in_data = None
