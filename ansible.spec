@@ -4,7 +4,7 @@
 #
 Name     : ansible
 Version  : 2.2.1.0
-Release  : 30
+Release  : 31
 URL      : http://releases.ansible.com/ansible/ansible-2.2.1.0.tar.gz
 Source0  : http://releases.ansible.com/ansible/ansible-2.2.1.0.tar.gz
 Summary  : Radically simple IT automation
@@ -22,6 +22,7 @@ BuildRequires : python-dev
 BuildRequires : python3-dev
 BuildRequires : setuptools
 Patch1: 0001-Look-for-roles-in-usr.patch
+Patch2: 0001-Add-representer-to-AnsibleDumper-for-AnsibleUnsafeTe.patch
 
 %description
 Ansible is a radically simple model-driven configuration management,
@@ -50,15 +51,16 @@ python components for the ansible package.
 %prep
 %setup -q -n ansible-2.2.1.0
 %patch1 -p1
+%patch2 -p1
 
 %build
 export LANG=C
-export SOURCE_DATE_EPOCH=1484933160
+export SOURCE_DATE_EPOCH=1484956971
 python2 setup.py build -b py2
 python3 setup.py build -b py3
 
 %install
-export SOURCE_DATE_EPOCH=1484933160
+export SOURCE_DATE_EPOCH=1484956971
 rm -rf %{buildroot}
 python2 -tt setup.py build -b py2 install --root=%{buildroot} --force
 python3 -tt setup.py build -b py3 install --root=%{buildroot} --force
