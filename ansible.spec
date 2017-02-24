@@ -4,7 +4,7 @@
 #
 Name     : ansible
 Version  : 2.2.1.0
-Release  : 31
+Release  : 32
 URL      : http://releases.ansible.com/ansible/ansible-2.2.1.0.tar.gz
 Source0  : http://releases.ansible.com/ansible/ansible-2.2.1.0.tar.gz
 Summary  : Radically simple IT automation
@@ -12,6 +12,11 @@ Group    : Development/Tools
 License  : GPL-2.0 GPL-3.0
 Requires: ansible-bin
 Requires: ansible-python
+Requires: Jinja2
+Requires: PyYAML
+Requires: paramiko
+Requires: pycrypto
+Requires: setuptools
 BuildRequires : Jinja2
 BuildRequires : PyYAML
 BuildRequires : paramiko
@@ -42,7 +47,6 @@ bin components for the ansible package.
 %package python
 Summary: python components for the ansible package.
 Group: Default
-Requires: Jinja2
 
 %description python
 python components for the ansible package.
@@ -55,12 +59,12 @@ python components for the ansible package.
 
 %build
 export LANG=C
-export SOURCE_DATE_EPOCH=1484956971
+export SOURCE_DATE_EPOCH=1487895127
 python2 setup.py build -b py2
 python3 setup.py build -b py3
 
 %install
-export SOURCE_DATE_EPOCH=1484956971
+export SOURCE_DATE_EPOCH=1487895127
 rm -rf %{buildroot}
 python2 -tt setup.py build -b py2 install --root=%{buildroot} --force
 python3 -tt setup.py build -b py3 install --root=%{buildroot} --force
