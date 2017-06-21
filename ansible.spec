@@ -4,7 +4,7 @@
 #
 Name     : ansible
 Version  : 2.2.2.0
-Release  : 33
+Release  : 34
 URL      : http://releases.ansible.com/ansible/ansible-2.2.2.0.tar.gz
 Source0  : http://releases.ansible.com/ansible/ansible-2.2.2.0.tar.gz
 Summary  : Radically simple IT automation
