@@ -1,0 +1,38 @@
+From ec14572a60bd901bb52f80c2f0dbdaf1ada0eb8a Mon Sep 17 00:00:00 2001
+From: James Cammarata <jimi@sngx.net>
+Date: Wed, 18 Jan 2017 19:35:24 -0600
+Subject: [PATCH] Add representer to AnsibleDumper for AnsibleUnsafeText
+
+Fixes #20253
+Fixes #20290
+---
+ lib/ansible/parsing/yaml/dumper.py | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/lib/ansible/parsing/yaml/dumper.py b/lib/ansible/parsing/yaml/dumper.py
+index 3ced4b6..58c2fb7 100644
+--- a/lib/ansible/parsing/yaml/dumper.py
++++ b/lib/ansible/parsing/yaml/dumper.py
+@@ -25,6 +25,7 @@ from ansible.compat.six import PY3
+ from ansible.parsing.yaml.objects import AnsibleUnicode, AnsibleSequence, AnsibleMapping
+ from ansible.parsing.yaml.objects import AnsibleVaultEncryptedUnicode
+ from ansible.vars.hostvars import HostVars
++from ansible.vars.unsafe_proxy import AnsibleUnsafeText
+ 
+ 
+ class AnsibleDumper(yaml.SafeDumper):
+@@ -52,6 +53,11 @@ AnsibleDumper.add_representer(
+ )
+ 
+ AnsibleDumper.add_representer(
++    AnsibleUnsafeText,
++    represent_unicode,
++)
++
++AnsibleDumper.add_representer(
+     HostVars,
+     represent_hostvars,
+ )
+-- 
+2.10.1 (Apple Git-78)
+

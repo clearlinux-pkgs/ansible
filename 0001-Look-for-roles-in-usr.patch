@@ -1,4 +1,4 @@
-From f4c2373b701e87ca5c72cef015215da2b3faa018 Mon Sep 17 00:00:00 2001
+From 8e4c26480892d7e812c2438941f36fd09dc0f46e Mon Sep 17 00:00:00 2001
 From: Alberto Murillo <alberto.murillo.silva@intel.com>
 Date: Fri, 26 Feb 2016 10:39:49 -0600
 Subject: [PATCH] Look for roles in /usr
@@ -8,18 +8,18 @@ Subject: [PATCH] Look for roles in /usr
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/lib/ansible/constants.py b/lib/ansible/constants.py
-index d9866a9..6ac67b0 100644
+index faa481d..c2df58c 100644
 --- a/lib/ansible/constants.py
 +++ b/lib/ansible/constants.py
-@@ -197,7 +197,7 @@ MERGE_MULTIPLE_CLI_TAGS = get_config(p, DEFAULTS, 'merge_multiple_cli_tags', 'AN
- DEFAULT_DEBUG             = get_config(p, DEFAULTS, 'debug',            'ANSIBLE_DEBUG',            False, value_type='boolean')
- DEFAULT_VERBOSITY         = get_config(p, DEFAULTS, 'verbosity',        'ANSIBLE_VERBOSITY',        0, value_type='integer')
- DEFAULT_HOST_LIST         = get_config(p, DEFAULTS,'inventory', 'ANSIBLE_INVENTORY', DEPRECATED_HOST_LIST, value_type='path')
--DEFAULT_ROLES_PATH        = get_config(p, DEFAULTS, 'roles_path',       'ANSIBLE_ROLES_PATH',       '/etc/ansible/roles', value_type='pathlist', expand_relative_paths=True)
-+DEFAULT_ROLES_PATH        = get_config(p, DEFAULTS, 'roles_path',       'ANSIBLE_ROLES_PATH',       '/etc/ansible/roles:/usr/share/ansible/roles', value_type='pathlist', expand_relative_paths=True)
+@@ -156,7 +156,7 @@ DEFAULT_PATTERN           = get_config(p, DEFAULTS, 'pattern', None, None)
+ DEFAULT_DEBUG             = get_config(p, DEFAULTS, 'debug',            'ANSIBLE_DEBUG',            False, boolean=True)
+ DEFAULT_HOST_LIST         = get_config(p, DEFAULTS,'inventory', 'ANSIBLE_INVENTORY', DEPRECATED_HOST_LIST, ispath=True)
+ DEFAULT_MODULE_PATH       = get_config(p, DEFAULTS, 'library',          'ANSIBLE_LIBRARY',          None, ispathlist=True)
+-DEFAULT_ROLES_PATH        = get_config(p, DEFAULTS, 'roles_path',       'ANSIBLE_ROLES_PATH',       '/etc/ansible/roles', ispathlist=True, expand_relative_paths=True)
++DEFAULT_ROLES_PATH        = get_config(p, DEFAULTS, 'roles_path',       'ANSIBLE_ROLES_PATH',       '/etc/ansible/roles:/usr/share/ansible/roles', ispathlist=True, expand_relative_paths=True)
  DEFAULT_REMOTE_TMP        = get_config(p, DEFAULTS, 'remote_tmp',       'ANSIBLE_REMOTE_TEMP',      '~/.ansible/tmp')
- DEFAULT_LOCAL_TMP         = get_config(p, DEFAULTS, 'local_tmp',        'ANSIBLE_LOCAL_TEMP',      '~/.ansible/tmp', value_type='tmppath')
+ DEFAULT_LOCAL_TMP         = get_config(p, DEFAULTS, 'local_tmp',        'ANSIBLE_LOCAL_TEMP',      '~/.ansible/tmp', istmppath=True)
  DEFAULT_MODULE_NAME       = get_config(p, DEFAULTS, 'module_name',      None,                       'command')
 -- 
-2.9.3
+2.7.4
 
