@@ -4,7 +4,7 @@
 #
 Name     : ansible
 Version  : 2.3.1.0
-Release  : 37
+Release  : 38
 URL      : https://releases.ansible.com/ansible/ansible-2.3.1.0.tar.gz
 Source0  : https://releases.ansible.com/ansible/ansible-2.3.1.0.tar.gz
 Summary  : Radically simple IT automation
