@@ -4,7 +4,7 @@
 #
 Name     : ansible
 Version  : 2.3.2.0
-Release  : 40
+Release  : 41
 URL      : https://releases.ansible.com/ansible/ansible-2.3.2.0.tar.gz
 Source0  : https://releases.ansible.com/ansible/ansible-2.3.2.0.tar.gz
 Summary  : Radically simple IT automation
@@ -24,6 +24,7 @@ Requires: pycrypto
 Requires: pytest
 Requires: python-memcached
 Requires: python-mock
+Requires: python-systemd
 Requires: redis
 Requires: setuptools
 Requires: unittest2
@@ -31,6 +32,7 @@ BuildRequires : go
 BuildRequires : pbr
 BuildRequires : pip
 BuildRequires : python-dev
+BuildRequires : python-systemd
 BuildRequires : python3-dev
 BuildRequires : setuptools
 Patch1: 0001-Look-for-roles-in-usr.patch
@@ -69,7 +71,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1505687079
+export SOURCE_DATE_EPOCH=1505688037
 python3 setup.py build -b py3
 
 %install
