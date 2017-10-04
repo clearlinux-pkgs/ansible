@@ -4,13 +4,14 @@
 #
 Name     : ansible
 Version  : 2.3.2.0
-Release  : 42
+Release  : 43
 URL      : https://releases.ansible.com/ansible/ansible-2.3.2.0.tar.gz
 Source0  : https://releases.ansible.com/ansible/ansible-2.3.2.0.tar.gz
 Summary  : Radically simple IT automation
 Group    : Development/Tools
 License  : GPL-2.0 GPL-3.0 GPL-3.0+
 Requires: ansible-bin
+Requires: ansible-python3
 Requires: ansible-python
 Requires: Jinja2
 Requires: PyYAML
@@ -56,9 +57,19 @@ bin components for the ansible package.
 %package python
 Summary: python components for the ansible package.
 Group: Default
+Requires: ansible-python3
 
 %description python
 python components for the ansible package.
+
+
+%package python3
+Summary: python3 components for the ansible package.
+Group: Default
+Requires: python3-core
+
+%description python3
+python3 components for the ansible package.
 
 
 %prep
@@ -71,7 +82,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1505688037
+export SOURCE_DATE_EPOCH=1507148305
 python3 setup.py build -b py3
 
 %install
@@ -96,5 +107,8 @@ echo ----[ mark ]----
 /usr/bin/ansible-vault
 
 %files python
+%defattr(-,root,root,-)
+
+%files python3
 %defattr(-,root,root,-)
 /usr/lib/python3*/*
