@@ -4,7 +4,7 @@
 #
 Name     : ansible
 Version  : 2.3.2.0
-Release  : 43
+Release  : 44
 URL      : https://releases.ansible.com/ansible/ansible-2.3.2.0.tar.gz
 Source0  : https://releases.ansible.com/ansible/ansible-2.3.2.0.tar.gz
 Summary  : Radically simple IT automation
@@ -82,7 +82,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1507148305
+export SOURCE_DATE_EPOCH=1507148528
 python3 setup.py build -b py3
 
 %install
