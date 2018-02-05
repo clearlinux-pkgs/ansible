@@ -1,3 +1,6 @@
 # This file contains additional runtime requirements that did not get
 # picked up automatically. One name per line, no whitespace.
 python-systemd
+paramiko
+PyYAML
+Jinja2

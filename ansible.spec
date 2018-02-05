@@ -4,7 +4,7 @@
 #
 Name     : ansible
 Version  : 2.4.3.0
-Release  : 48
+Release  : 49
 URL      : https://releases.ansible.com/ansible/ansible-2.4.3.0.tar.gz
 Source0  : https://releases.ansible.com/ansible/ansible-2.4.3.0.tar.gz
 Summary  : Radically simple IT automation
@@ -13,6 +13,9 @@ License  : GPL-2.0 GPL-3.0 GPL-3.0+
 Requires: ansible-bin
 Requires: ansible-python3
 Requires: ansible-python
+Requires: Jinja2
+Requires: PyYAML
+Requires: paramiko
 Requires: python-systemd
 Requires: setuptools
 BuildRequires : go
@@ -62,7 +65,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1517780047
+export SOURCE_DATE_EPOCH=1517846196
 python3 setup.py build -b py3
 
 %install
