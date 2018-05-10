@@ -4,7 +4,7 @@
 #
 Name     : ansible
 Version  : 2.5.2
-Release  : 52
+Release  : 53
 URL      : https://github.com/ansible/ansible/archive/v2.5.2.tar.gz
 Source0  : https://github.com/ansible/ansible/archive/v2.5.2.tar.gz
 Summary  : Empty RPM
