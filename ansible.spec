@@ -4,7 +4,7 @@
 #
 Name     : ansible
 Version  : 2.5.4
-Release  : 57
+Release  : 58
 URL      : https://github.com/ansible/ansible/archive/v2.5.4.tar.gz
 Source0  : https://github.com/ansible/ansible/archive/v2.5.4.tar.gz
 Summary  : Empty RPM
