@@ -4,7 +4,7 @@
 #
 Name     : ansible
 Version  : 2.5.4
-Release  : 55
+Release  : 56
 URL      : https://github.com/ansible/ansible/archive/v2.5.4.tar.gz
 Source0  : https://github.com/ansible/ansible/archive/v2.5.4.tar.gz
 Summary  : Empty RPM
@@ -12,6 +12,7 @@ Group    : Development/Tools
 License  : GPL-2.0 GPL-3.0 GPL-3.0+
 Requires: ansible-bin
 Requires: ansible-python3
+Requires: ansible-license
 Requires: ansible-python
 Requires: Jinja2
 Requires: PyYAML
@@ -26,7 +27,6 @@ BuildRequires : pip
 BuildRequires : pluggy
 BuildRequires : py-python
 BuildRequires : pytest
-BuildRequires : python-dev
 BuildRequires : python-systemd
 BuildRequires : python3-dev
 BuildRequires : setuptools
@@ -40,9 +40,26 @@ Empty RPM
 %package bin
 Summary: bin components for the ansible package.
 Group: Binaries
+Requires: ansible-license
 
 %description bin
 bin components for the ansible package.
+
+
+%package doc
+Summary: doc components for the ansible package.
+Group: Documentation
+
+%description doc
+doc components for the ansible package.
+
+
+%package license
+Summary: license components for the ansible package.
+Group: Default
+
+%description license
+license components for the ansible package.
 
 
 %package python
@@ -72,11 +89,14 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1528669920
+export SOURCE_DATE_EPOCH=1529090435
 python3 setup.py build -b py3
 
 %install
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/doc/ansible
+cp COPYING %{buildroot}/usr/share/doc/ansible/COPYING
+cp packaging/debian/copyright %{buildroot}/usr/share/doc/ansible/packaging_debian_copyright
 python3 -tt setup.py build -b py3 install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
@@ -97,6 +117,14 @@ echo ----[ mark ]----
 /usr/bin/ansible-playbook
 /usr/bin/ansible-pull
 /usr/bin/ansible-vault
+
+%files doc
+%defattr(0644,root,root,0755)
+%doc /usr/share/doc/ansible/*
+
+%files license
+%defattr(-,root,root,-)
+/usr/share/doc/ansible/COPYING
 
 %files python
 %defattr(-,root,root,-)
