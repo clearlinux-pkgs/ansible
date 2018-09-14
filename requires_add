@@ -4,3 +4,4 @@ python-systemd
 paramiko
 PyYAML
 Jinja2
+sshpass

@@ -4,7 +4,7 @@
 #
 Name     : ansible
 Version  : 2.6.1
-Release  : 66
+Release  : 67
 URL      : https://github.com/ansible/ansible/archive/v2.6.1.tar.gz
 Source0  : https://github.com/ansible/ansible/archive/v2.6.1.tar.gz
 Summary  : Empty RPM
@@ -21,15 +21,14 @@ Requires: netaddr
 Requires: paramiko
 Requires: python-systemd
 Requires: setuptools
-BuildRequires : go
-BuildRequires : pbr
-BuildRequires : pip
+Requires: sshpass
+BuildRequires : buildreq-distutils3
+BuildRequires : buildreq-golang
 BuildRequires : pluggy
 BuildRequires : py-python
 BuildRequires : pytest
 BuildRequires : python-systemd
-BuildRequires : python3-dev
-BuildRequires : setuptools
+BuildRequires : sshpass
 BuildRequires : tox
 BuildRequires : virtualenv
 Patch1: 0001-try-scp-first.patch
@@ -89,7 +88,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1530987556
+export SOURCE_DATE_EPOCH=1536894907
 python3 setup.py build -b py3
 
 %install
