@@ -1,15 +1,15 @@
-From f90cda6f599762363bb085341123a243e5441f44 Mon Sep 17 00:00:00 2001
+From 1bbe27e326ea560f1398d3282b68b7e0d9f61972 Mon Sep 17 00:00:00 2001
 From: Josue David Hernandez <josue.d.hernandez.gutierrez@intel.com>
-Date: Mon, 15 Oct 2018 20:33:03 -0500
+Date: Mon, 15 Oct 2018 21:20:17 -0500
 Subject: [PATCH] Adding support for clearlinux showing release nuber
 
 Signed-off-by: Josue David Hernandez <josue.d.hernandez.gutierrez@intel.com>
 ---
- .../module_utils/facts/system/distribution.py        | 12 +++++++++++-
- 1 file changed, 11 insertions(+), 1 deletion(-)
+ .../module_utils/facts/system/distribution.py    | 16 +++++++++++++++-
+ 1 file changed, 15 insertions(+), 1 deletion(-)
 
 diff --git a/lib/ansible/module_utils/facts/system/distribution.py b/lib/ansible/module_utils/facts/system/distribution.py
-index a0f3883..246ab1b 100644
+index a0f3883..74d7967 100644
 --- a/lib/ansible/module_utils/facts/system/distribution.py
 +++ b/lib/ansible/module_utils/facts/system/distribution.py
 @@ -83,7 +83,6 @@ class DistributionFiles:
@@ -20,7 +20,7 @@ index a0f3883..246ab1b 100644
          'SMGL': 'Source Mage GNU/Linux',
      }
  
-@@ -366,6 +365,17 @@ class DistributionFiles:
+@@ -366,6 +365,21 @@ class DistributionFiles:
  
          return True, coreos_facts
  
@@ -31,7 +31,11 @@ index a0f3883..246ab1b 100644
 +
 +        version = re.search('VERSION_ID=(.*)', data)
 +        if version:
-+            clear_facts['distribution_release'] = version.groups()[0]
++            clear_facts['distribution_major_version'] = version.groups()[0]
++            clear_facts['distribution_version'] = version.groups()[0]
++        release = re.search('ID=(.*)', data)
++        if release:
++            clear_facts['distribution_release'] = release.groups()[0]
 +        return True, clear_facts
 +
 +
