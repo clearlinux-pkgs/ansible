@@ -4,16 +4,17 @@
 #
 Name     : ansible
 Version  : 2.6.1
-Release  : 67
+Release  : 68
 URL      : https://github.com/ansible/ansible/archive/v2.6.1.tar.gz
 Source0  : https://github.com/ansible/ansible/archive/v2.6.1.tar.gz
 Summary  : Empty RPM
 Group    : Development/Tools
 License  : GPL-2.0 GPL-3.0 GPL-3.0+
-Requires: ansible-bin
-Requires: ansible-python3
-Requires: ansible-license
-Requires: ansible-python
+Requires: ansible-bin = %{version}-%{release}
+Requires: ansible-data = %{version}-%{release}
+Requires: ansible-license = %{version}-%{release}
+Requires: ansible-python = %{version}-%{release}
+Requires: ansible-python3 = %{version}-%{release}
 Requires: Jinja2
 Requires: PyYAML
 Requires: cryptography
@@ -32,6 +33,7 @@ BuildRequires : sshpass
 BuildRequires : tox
 BuildRequires : virtualenv
 Patch1: 0001-try-scp-first.patch
+Patch2: 0001-Adding-support-for-clearlinux-showing-release-nuber.patch
 
 %description
 Empty RPM
@@ -39,18 +41,19 @@ Empty RPM
 %package bin
 Summary: bin components for the ansible package.
 Group: Binaries
-Requires: ansible-license
+Requires: ansible-data = %{version}-%{release}
+Requires: ansible-license = %{version}-%{release}
 
 %description bin
 bin components for the ansible package.
 
 
-%package doc
-Summary: doc components for the ansible package.
-Group: Documentation
+%package data
+Summary: data components for the ansible package.
+Group: Data
 
-%description doc
-doc components for the ansible package.
+%description data
+data components for the ansible package.
 
 
 %package license
@@ -64,7 +67,7 @@ license components for the ansible package.
 %package python
 Summary: python components for the ansible package.
 Group: Default
-Requires: ansible-python3
+Requires: ansible-python3 = %{version}-%{release}
 
 %description python
 python components for the ansible package.
@@ -82,21 +85,22 @@ python3 components for the ansible package.
 %prep
 %setup -q -n ansible-2.6.1
 %patch1 -p1
+%patch2 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1536894907
-python3 setup.py build -b py3
+export SOURCE_DATE_EPOCH=1539654471
+python3 setup.py build
 
 %install
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/ansible
-cp COPYING %{buildroot}/usr/share/doc/ansible/COPYING
-cp packaging/debian/copyright %{buildroot}/usr/share/doc/ansible/packaging_debian_copyright
-python3 -tt setup.py build -b py3 install --root=%{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/ansible
+cp COPYING %{buildroot}/usr/share/package-licenses/ansible/COPYING
+cp packaging/debian/copyright %{buildroot}/usr/share/package-licenses/ansible/packaging_debian_copyright
+python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
@@ -117,13 +121,13 @@ echo ----[ mark ]----
 /usr/bin/ansible-pull
 /usr/bin/ansible-vault
 
-%files doc
-%defattr(0644,root,root,0755)
-%doc /usr/share/doc/ansible/*
+%files data
+%defattr(-,root,root,-)
+/usr/share/package-licenses/ansible/packaging_debian_copyright
 
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/ansible/COPYING
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/ansible/COPYING
 
 %files python
 %defattr(-,root,root,-)
