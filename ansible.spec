@@ -4,14 +4,13 @@
 #
 Name     : ansible
 Version  : 2.6.1
-Release  : 69
+Release  : 70
 URL      : https://github.com/ansible/ansible/archive/v2.6.1.tar.gz
 Source0  : https://github.com/ansible/ansible/archive/v2.6.1.tar.gz
 Summary  : Empty RPM
 Group    : Development/Tools
 License  : GPL-2.0 GPL-3.0 GPL-3.0+
 Requires: ansible-bin = %{version}-%{release}
-Requires: ansible-data = %{version}-%{release}
 Requires: ansible-license = %{version}-%{release}
 Requires: ansible-python = %{version}-%{release}
 Requires: ansible-python3 = %{version}-%{release}
@@ -41,19 +40,10 @@ Empty RPM
 %package bin
 Summary: bin components for the ansible package.
 Group: Binaries
-Requires: ansible-data = %{version}-%{release}
 Requires: ansible-license = %{version}-%{release}
 
 %description bin
 bin components for the ansible package.
-
-
-%package data
-Summary: data components for the ansible package.
-Group: Data
-
-%description data
-data components for the ansible package.
 
 
 %package license
@@ -92,7 +82,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1539656778
+export SOURCE_DATE_EPOCH=1543541661
 python3 setup.py build
 
 %install
@@ -121,13 +111,10 @@ echo ----[ mark ]----
 /usr/bin/ansible-pull
 /usr/bin/ansible-vault
 
-%files data
-%defattr(-,root,root,-)
-/usr/share/package-licenses/ansible/packaging_debian_copyright
-
 %files license
 %defattr(0644,root,root,0755)
 /usr/share/package-licenses/ansible/COPYING
+/usr/share/package-licenses/ansible/packaging_debian_copyright
 
 %files python
 %defattr(-,root,root,-)
