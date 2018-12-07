@@ -4,7 +4,7 @@
 #
 Name     : ansible
 Version  : 2.6.1
-Release  : 70
+Release  : 71
 URL      : https://github.com/ansible/ansible/archive/v2.6.1.tar.gz
 Source0  : https://github.com/ansible/ansible/archive/v2.6.1.tar.gz
 Summary  : Empty RPM
@@ -82,7 +82,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1543541661
+export SOURCE_DATE_EPOCH=1544146330
 python3 setup.py build
 
 %install
