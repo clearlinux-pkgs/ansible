@@ -1,15 +1,15 @@
-From 6a7f5feed28b56fe69c2c5ffc646a5f62723ae51 Mon Sep 17 00:00:00 2001
+From 5a1086cf790ed1be75ddd375169bf0fddf9b4911 Mon Sep 17 00:00:00 2001
 From: Josue David Hernandez <josue.d.hernandez.gutierrez@intel.com>
 Date: Mon, 15 Oct 2018 21:20:17 -0500
 Subject: [PATCH] Adding support for clearlinux showing release nuber
 
 Signed-off-by: Josue David Hernandez <josue.d.hernandez.gutierrez@intel.com>
 ---
- .../module_utils/facts/system/distribution.py | 20 ++++++++++++++++---
- 1 file changed, 17 insertions(+), 3 deletions(-)
+ .../module_utils/facts/system/distribution.py | 23 ++++++++++++++++---
+ 1 file changed, 20 insertions(+), 3 deletions(-)
 
 diff --git a/lib/ansible/module_utils/facts/system/distribution.py b/lib/ansible/module_utils/facts/system/distribution.py
-index a0f3883..76368b3 100644
+index a0f3883..8cefa8b 100644
 --- a/lib/ansible/module_utils/facts/system/distribution.py
 +++ b/lib/ansible/module_utils/facts/system/distribution.py
 @@ -74,16 +74,15 @@ class DistributionFiles:
@@ -30,7 +30,7 @@ index a0f3883..76368b3 100644
          'SMGL': 'Source Mage GNU/Linux',
      }
  
-@@ -366,6 +365,21 @@ class DistributionFiles:
+@@ -366,6 +365,24 @@ class DistributionFiles:
  
          return True, coreos_facts
  
@@ -46,13 +46,16 @@ index a0f3883..76368b3 100644
 +        release = re.search('ID=(.*)', data)
 +        if release:
 +            clear_facts['distribution_release'] = release.groups()[0]
++        pname = re.search('PRETTY_NAME="(.*)"', data)
++        if pname:
++            clear_facts['distribution'] = pname.groups()[0]
 +        return True, clear_facts
 +
 +
  
  class Distribution(object):
      """
-@@ -396,9 +410,9 @@ class Distribution(object):
+@@ -396,9 +413,9 @@ class Distribution(object):
          {'path': '/etc/lsb-release', 'name': 'Mandriva'},
          {'path': '/etc/altlinux-release', 'name': 'Altlinux'},
          {'path': '/etc/sourcemage-release', 'name': 'SMGL'},
