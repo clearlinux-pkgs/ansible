@@ -1,15 +1,15 @@
-From 5a1086cf790ed1be75ddd375169bf0fddf9b4911 Mon Sep 17 00:00:00 2001
+From 170af863d4838fe84d23501a243e591fb150ecb4 Mon Sep 17 00:00:00 2001
 From: Josue David Hernandez <josue.d.hernandez.gutierrez@intel.com>
 Date: Mon, 15 Oct 2018 21:20:17 -0500
 Subject: [PATCH] Adding support for clearlinux showing release nuber
 
 Signed-off-by: Josue David Hernandez <josue.d.hernandez.gutierrez@intel.com>
 ---
- .../module_utils/facts/system/distribution.py | 23 ++++++++++++++++---
- 1 file changed, 20 insertions(+), 3 deletions(-)
+ .../module_utils/facts/system/distribution.py | 26 ++++++++++++++++---
+ 1 file changed, 22 insertions(+), 4 deletions(-)
 
 diff --git a/lib/ansible/module_utils/facts/system/distribution.py b/lib/ansible/module_utils/facts/system/distribution.py
-index a0f3883..8cefa8b 100644
+index a0f3883..c3149d6 100644
 --- a/lib/ansible/module_utils/facts/system/distribution.py
 +++ b/lib/ansible/module_utils/facts/system/distribution.py
 @@ -74,16 +74,15 @@ class DistributionFiles:
@@ -46,7 +46,7 @@ index a0f3883..8cefa8b 100644
 +        release = re.search('ID=(.*)', data)
 +        if release:
 +            clear_facts['distribution_release'] = release.groups()[0]
-+        pname = re.search('PRETTY_NAME="(.*)"', data)
++        pname = re.search('NAME="(.*)"', data)
 +        if pname:
 +            clear_facts['distribution'] = pname.groups()[0]
 +        return True, clear_facts
@@ -66,6 +66,16 @@ index a0f3883..8cefa8b 100644
      )
  
      SEARCH_STRING = {
+@@ -428,7 +445,8 @@ class Distribution(object):
+                      'AIX': ['AIX'],
+                      'HP-UX': ['HPUX'],
+                      'Darwin': ['MacOSX'],
+-                     'FreeBSD': ['FreeBSD', 'TrueOS']}
++                     'FreeBSD': ['FreeBSD', 'TrueOS'],
++                     'ClearLinux': ['Clear Linux OS', 'Clear Linux Mix']}
+ 
+     OS_FAMILY = {}
+     for family, names in OS_FAMILY_MAP.items():
 -- 
 2.19.2
 
