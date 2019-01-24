@@ -4,7 +4,7 @@
 #
 Name     : ansible
 Version  : 2.7.6
-Release  : 75
+Release  : 76
 URL      : https://github.com/ansible/ansible/archive/v2.7.6.tar.gz
 Source0  : https://github.com/ansible/ansible/archive/v2.7.6.tar.gz
 Summary  : Empty RPM
