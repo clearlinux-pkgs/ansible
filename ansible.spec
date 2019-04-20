@@ -4,7 +4,7 @@
 #
 Name     : ansible
 Version  : 2.7.10
-Release  : 80
+Release  : 81
 URL      : https://github.com/ansible/ansible/archive/v2.7.10.tar.gz
 Source0  : https://github.com/ansible/ansible/archive/v2.7.10.tar.gz
 Summary  : SSH-based application deployment, configuration management, and IT orchestration platform
