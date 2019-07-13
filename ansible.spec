@@ -4,7 +4,7 @@
 #
 Name     : ansible
 Version  : 2.8.1
-Release  : 82
+Release  : 83
 URL      : https://github.com/ansible/ansible/archive/v2.8.1/ansible-2.8.1.tar.gz
 Source0  : https://github.com/ansible/ansible/archive/v2.8.1/ansible-2.8.1.tar.gz
 Summary  : Radically simple IT automation platform
