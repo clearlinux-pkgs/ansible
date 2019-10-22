@@ -4,7 +4,7 @@
 #
 Name     : ansible
 Version  : 2.8.6
-Release  : 86
+Release  : 87
 URL      : https://github.com/ansible/ansible/archive/v2.8.6/ansible-2.8.6.tar.gz
 Source0  : https://github.com/ansible/ansible/archive/v2.8.6/ansible-2.8.6.tar.gz
 Summary  : SSH-based application deployment, configuration management, and IT orchestration platform
@@ -32,6 +32,7 @@ BuildRequires : pytest
 BuildRequires : python-systemd
 BuildRequires : sshpass
 BuildRequires : tox
+BuildRequires : util-linux
 BuildRequires : virtualenv
 
 %description
@@ -77,14 +78,14 @@ python3 components for the ansible package.
 
 
 %prep
-%setup -q -n ansible-2.8.5
+%setup -q -n ansible-2.8.6
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1571360103
+export SOURCE_DATE_EPOCH=1571784035
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -100,11 +101,11 @@ python3 setup.py build
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/ansible
-cp %{_builddir}/ansible-2.8.5/COPYING %{buildroot}/usr/share/package-licenses/ansible/338650eb7a42dd9bc1f1c6961420f2633b24932d
-cp %{_builddir}/ansible-2.8.5/licenses/Apache-License.txt %{buildroot}/usr/share/package-licenses/ansible/c700a8b9312d24bdc57570f7d6a131cf63d89016
-cp %{_builddir}/ansible-2.8.5/licenses/MIT-license.txt %{buildroot}/usr/share/package-licenses/ansible/df180fcf964224ba9180a646ca107bfe65595f23
-cp %{_builddir}/ansible-2.8.5/licenses/PSF-license.txt %{buildroot}/usr/share/package-licenses/ansible/7b14725671bae6dc04be2b87de58131f0614dfad
-cp %{_builddir}/ansible-2.8.5/packaging/debian/copyright %{buildroot}/usr/share/package-licenses/ansible/b7f3dc6d692392795202ab560c7583e986d8352b
+cp %{_builddir}/ansible-2.8.6/COPYING %{buildroot}/usr/share/package-licenses/ansible/338650eb7a42dd9bc1f1c6961420f2633b24932d
+cp %{_builddir}/ansible-2.8.6/licenses/Apache-License.txt %{buildroot}/usr/share/package-licenses/ansible/c700a8b9312d24bdc57570f7d6a131cf63d89016
+cp %{_builddir}/ansible-2.8.6/licenses/MIT-license.txt %{buildroot}/usr/share/package-licenses/ansible/df180fcf964224ba9180a646ca107bfe65595f23
+cp %{_builddir}/ansible-2.8.6/licenses/PSF-license.txt %{buildroot}/usr/share/package-licenses/ansible/7b14725671bae6dc04be2b87de58131f0614dfad
+cp %{_builddir}/ansible-2.8.6/packaging/debian/copyright %{buildroot}/usr/share/package-licenses/ansible/b7f3dc6d692392795202ab560c7583e986d8352b
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
