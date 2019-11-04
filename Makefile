@@ -1,5 +1,5 @@
 PKG_NAME := ansible
-URL = https://github.com/ansible/ansible/archive/v2.8.6/ansible-2.8.6.tar.gz
+URL = https://github.com/ansible/ansible/archive/v2.9.0/ansible-2.9.0.tar.gz
 ARCHIVES = 
 
 include ../common/Makefile.common
