@@ -4,7 +4,7 @@
 #
 Name     : ansible
 Version  : 2.9.1
-Release  : 91
+Release  : 92
 URL      : https://github.com/ansible/ansible/archive/v2.9.1/ansible-2.9.1.tar.gz
 Source0  : https://github.com/ansible/ansible/archive/v2.9.1/ansible-2.9.1.tar.gz
 Summary  : SSH-based configuration management, deployment, and task execution system
