@@ -4,10 +4,10 @@
 #
 Name     : ansible
 Version  : 2.9.5
-Release  : 95
+Release  : 96
 URL      : https://github.com/ansible/ansible/archive/v2.9.5/ansible-2.9.5.tar.gz
 Source0  : https://github.com/ansible/ansible/archive/v2.9.5/ansible-2.9.5.tar.gz
-Summary  : SSH-based configuration management, deployment, and task execution system
+Summary  : Radically simple IT automation platform
 Group    : Development/Tools
 License  : Apache-2.0 GPL-2.0 GPL-3.0 GPL-3.0+ MIT Python-2.0
 Requires: ansible-bin = %{version}-%{release}
@@ -65,6 +65,7 @@ python components for the ansible package.
 Summary: python3 components for the ansible package.
 Group: Default
 Requires: python3-core
+Provides: pypi(ansible)
 
 %description python3
 python3 components for the ansible package.
@@ -79,7 +80,8 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1581706878
+export SOURCE_DATE_EPOCH=1582845773
+# -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
