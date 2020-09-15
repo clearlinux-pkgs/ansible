@@ -1,1 +1,1 @@
-#special_releases = alpha a
+regex = ^2\.9\..*
