@@ -4,7 +4,7 @@
 #
 Name     : ansible
 Version  : 2.9.13
-Release  : 105
+Release  : 106
 URL      : https://github.com/ansible/ansible/archive/v2.9.13/ansible-2.9.13.tar.gz
 Source0  : https://github.com/ansible/ansible/archive/v2.9.13/ansible-2.9.13.tar.gz
 Summary  : Radically simple IT automation
