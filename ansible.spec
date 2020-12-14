@@ -4,7 +4,7 @@
 #
 Name     : ansible
 Version  : 2.9.15
-Release  : 108
+Release  : 109
 URL      : https://github.com/ansible/ansible/archive/v2.9.15/ansible-2.9.15.tar.gz
 Source0  : https://github.com/ansible/ansible/archive/v2.9.15/ansible-2.9.15.tar.gz
 Summary  : Radically simple IT automation
