@@ -4,7 +4,7 @@
 #
 Name     : ansible
 Version  : 2.9.17
-Release  : 113
+Release  : 114
 URL      : https://github.com/ansible/ansible/archive/v2.9.17/ansible-2.9.17.tar.gz
 Source0  : https://github.com/ansible/ansible/archive/v2.9.17/ansible-2.9.17.tar.gz
 Summary  : Radically simple IT automation
