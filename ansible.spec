@@ -4,7 +4,7 @@
 #
 Name     : ansible
 Version  : 2.9.20
-Release  : 117
+Release  : 118
 URL      : https://github.com/ansible/ansible/archive/v2.9.20/ansible-2.9.20.tar.gz
 Source0  : https://github.com/ansible/ansible/archive/v2.9.20/ansible-2.9.20.tar.gz
 Summary  : Radically simple IT automation
