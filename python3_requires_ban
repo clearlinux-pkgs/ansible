@@ -1,1 +1,2 @@
 pypi(ansible_base)
+pypi(ansible_core)
