@@ -6,7 +6,7 @@
 #
 Name     : ansible
 Version  : 4.6.0
-Release  : 130
+Release  : 131
 URL      : https://files.pythonhosted.org/packages/81/b6/2f27c1b1b61b12b718375e79620da9d7b2cb9a07331fd455ee36cfb17734/ansible-4.6.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/81/b6/2f27c1b1b61b12b718375e79620da9d7b2cb9a07331fd455ee36cfb17734/ansible-4.6.0.tar.gz
 Source1  : https://files.pythonhosted.org/packages/81/b6/2f27c1b1b61b12b718375e79620da9d7b2cb9a07331fd455ee36cfb17734/ansible-4.6.0.tar.gz.asc
@@ -57,8 +57,8 @@ Requires: pycodestyle
 Requires: pycparser
 Requires: pylint
 Requires: pyparsing
-Requires: python
 Requires: python-dateutil
+Requires: python3
 Requires: pytz
 Requires: regex
 Requires: requests
@@ -120,8 +120,8 @@ BuildRequires : pycodestyle
 BuildRequires : pycparser
 BuildRequires : pylint
 BuildRequires : pyparsing
-BuildRequires : python
 BuildRequires : python-dateutil
+BuildRequires : python3
 BuildRequires : pytz
 BuildRequires : regex
 BuildRequires : requests
