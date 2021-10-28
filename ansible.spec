@@ -6,7 +6,7 @@
 #
 Name     : ansible
 Version  : 4.7.0
-Release  : 135
+Release  : 136
 URL      : https://files.pythonhosted.org/packages/9b/ed/5a6149a7e0314bfb99fd496781f84a96328e0eb0a85f5cb845c25fcb909a/ansible-4.7.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/9b/ed/5a6149a7e0314bfb99fd496781f84a96328e0eb0a85f5cb845c25fcb909a/ansible-4.7.0.tar.gz
 Source1  : https://files.pythonhosted.org/packages/9b/ed/5a6149a7e0314bfb99fd496781f84a96328e0eb0a85f5cb845c25fcb909a/ansible-4.7.0.tar.gz.asc
