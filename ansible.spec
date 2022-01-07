@@ -6,7 +6,7 @@
 #
 Name     : ansible
 Version  : 4.8.0
-Release  : 140
+Release  : 141
 URL      : https://files.pythonhosted.org/packages/ac/17/cb3ae6e4ae5b2d936ec5bf7e20cb91814e3af3ed27bbfcdf8a7253a016d5/ansible-4.8.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/ac/17/cb3ae6e4ae5b2d936ec5bf7e20cb91814e3af3ed27bbfcdf8a7253a016d5/ansible-4.8.0.tar.gz
 Source1  : https://files.pythonhosted.org/packages/ac/17/cb3ae6e4ae5b2d936ec5bf7e20cb91814e3af3ed27bbfcdf8a7253a016d5/ansible-4.8.0.tar.gz.asc
@@ -16,134 +16,108 @@ License  : Apache-2.0 GPL-2.0 GPL-3.0 GPL-3.0+ MIT
 Requires: ansible-license = %{version}-%{release}
 Requires: ansible-python = %{version}-%{release}
 Requires: ansible-python3 = %{version}-%{release}
-Requires: Jinja2
-Requires: MarkupSafe
-Requires: PyYAML
-Requires: ansible-core
-Requires: appdirs
-Requires: arrow
-Requires: asn1crypto
-Requires: astroid
-Requires: atomicwrites
-Requires: attrs
-Requires: black
-Requires: boto
-Requires: boto3
-Requires: botocore
-Requires: certifi
-Requires: cffi
-Requires: chardet
-Requires: click
-Requires: colorama
-Requires: cryptography
-Requires: docker
-Requires: google-auth
-Requires: idna
-Requires: ipaddr
-Requires: isort
-Requires: jmespath
-Requires: jsonschema
-Requires: lazy-object-proxy
-Requires: lxml
-Requires: mccabe
-Requires: more-itertools
-Requires: netaddr
-Requires: ordereddict
-Requires: packaging
-Requires: paramiko
-Requires: pathspec
-Requires: pluggy
-Requires: py
-Requires: pyOpenSSL
-Requires: pycodestyle
-Requires: pycparser
-Requires: pylint
-Requires: pyparsing
-Requires: python-dateutil
 Requires: python3
-Requires: pytz
-Requires: regex
-Requires: requests
-Requires: requests-oauthlib
-Requires: requests-toolbelt
-Requires: ruamel.yaml
-Requires: ruamel.yaml.clib
-Requires: scp
-Requires: simplejson
-Requires: six
-Requires: toml
-Requires: urllib3
-Requires: voluptuous
-Requires: wcwidth
-Requires: wheel
-Requires: wrapt
-Requires: xmltodict
-Requires: zipp
-BuildRequires : Jinja2
-BuildRequires : MarkupSafe
-BuildRequires : PyYAML
-BuildRequires : ansible-core
-BuildRequires : appdirs
-BuildRequires : arrow
-BuildRequires : asn1crypto
-BuildRequires : astroid
-BuildRequires : atomicwrites
-BuildRequires : attrs
-BuildRequires : black
-BuildRequires : boto
-BuildRequires : boto3
-BuildRequires : botocore
 BuildRequires : buildreq-distutils3
-BuildRequires : certifi
-BuildRequires : cffi
-BuildRequires : chardet
-BuildRequires : click
-BuildRequires : colorama
-BuildRequires : cryptography
-BuildRequires : docker
-BuildRequires : google-auth
-BuildRequires : idna
-BuildRequires : ipaddr
-BuildRequires : isort
-BuildRequires : jmespath
-BuildRequires : jsonschema
-BuildRequires : lazy-object-proxy
-BuildRequires : lxml
-BuildRequires : mccabe
-BuildRequires : more-itertools
-BuildRequires : netaddr
-BuildRequires : ordereddict
-BuildRequires : packaging
-BuildRequires : paramiko
-BuildRequires : pathspec
-BuildRequires : pbr
-BuildRequires : pluggy
-BuildRequires : py
-BuildRequires : pyOpenSSL
-BuildRequires : pycodestyle
-BuildRequires : pycparser
-BuildRequires : pylint
-BuildRequires : pyparsing
-BuildRequires : python-dateutil
+BuildRequires : pypi(ansible)
+BuildRequires : pypi(ansible_compat)
+BuildRequires : pypi(ansible_core)
+BuildRequires : pypi(appdirs)
+BuildRequires : pypi(arrow)
+BuildRequires : pypi(asn1crypto)
+BuildRequires : pypi(astroid)
+BuildRequires : pypi(atomicwrites)
+BuildRequires : pypi(attrs)
+BuildRequires : pypi(awxkit)
+BuildRequires : pypi(azure_common)
+BuildRequires : pypi(azure_mgmt_compute)
+BuildRequires : pypi(azure_mgmt_core)
+BuildRequires : pypi(azure_mgmt_netapp)
+BuildRequires : pypi(azure_mgmt_network)
+BuildRequires : pypi(azure_mgmt_resource)
+BuildRequires : pypi(azure_mgmt_storage)
+BuildRequires : pypi(black)
+BuildRequires : pypi(boto)
+BuildRequires : pypi(boto3)
+BuildRequires : pypi(botocore)
+BuildRequires : pypi(certifi)
+BuildRequires : pypi(cffi)
+BuildRequires : pypi(chardet)
+BuildRequires : pypi(click)
+BuildRequires : pypi(colorama)
+BuildRequires : pypi(cryptography)
+BuildRequires : pypi(cs)
+BuildRequires : pypi(docker)
+BuildRequires : pypi(google_auth)
+BuildRequires : pypi(idna)
+BuildRequires : pypi(importlib_metadata)
+BuildRequires : pypi(infi.dtypes.iqn)
+BuildRequires : pypi(infi.dtypes.wwn)
+BuildRequires : pypi(inspursmsdk)
+BuildRequires : pypi(ipaddr)
+BuildRequires : pypi(ipaddress)
+BuildRequires : pypi(isort)
+BuildRequires : pypi(jinja2)
+BuildRequires : pypi(jmespath)
+BuildRequires : pypi(jsonschema)
+BuildRequires : pypi(jxmlease)
+BuildRequires : pypi(lazy_object_proxy)
+BuildRequires : pypi(lxml)
+BuildRequires : pypi(markupsafe)
+BuildRequires : pypi(mccabe)
+BuildRequires : pypi(molecule)
+BuildRequires : pypi(more_itertools)
+BuildRequires : pypi(msrestazure)
+BuildRequires : pypi(munch)
+BuildRequires : pypi(ncclient)
+BuildRequires : pypi(netaddr)
+BuildRequires : pypi(netapp_lib)
+BuildRequires : pypi(openshift)
+BuildRequires : pypi(ordereddict)
+BuildRequires : pypi(packaging)
+BuildRequires : pypi(paramiko)
+BuildRequires : pypi(pathspec)
+BuildRequires : pypi(pbr)
+BuildRequires : pypi(pluggy)
+BuildRequires : pypi(poetry_core)
+BuildRequires : pypi(purestorage)
+BuildRequires : pypi(purity_fb)
+BuildRequires : pypi(py)
+BuildRequires : pypi(pycodestyle)
+BuildRequires : pypi(pycountry)
+BuildRequires : pypi(pycparser)
+BuildRequires : pypi(pylint)
+BuildRequires : pypi(pyopenssl)
+BuildRequires : pypi(pyparsing)
+BuildRequires : pypi(pysnow)
+BuildRequires : pypi(python_dateutil)
+BuildRequires : pypi(pytz)
+BuildRequires : pypi(pyyaml)
+BuildRequires : pypi(regex)
+BuildRequires : pypi(requests)
+BuildRequires : pypi(requests_oauthlib)
+BuildRequires : pypi(requests_toolbelt)
+BuildRequires : pypi(ruamel.yaml)
+BuildRequires : pypi(ruamel.yaml.clib)
+BuildRequires : pypi(scp)
+BuildRequires : pypi(selectors2)
+BuildRequires : pypi(sentinels)
+BuildRequires : pypi(simplejson)
+BuildRequires : pypi(six)
+BuildRequires : pypi(textfsm)
+BuildRequires : pypi(toml)
+BuildRequires : pypi(ttp)
+BuildRequires : pypi(typed_ast)
+BuildRequires : pypi(urllib3)
+BuildRequires : pypi(urlobject)
+BuildRequires : pypi(voluptuous)
+BuildRequires : pypi(wcwidth)
+BuildRequires : pypi(wheel)
+BuildRequires : pypi(wrapt)
+BuildRequires : pypi(xmljson)
+BuildRequires : pypi(xmltodict)
+BuildRequires : pypi(zabbix_api)
+BuildRequires : pypi(zipp)
 BuildRequires : python3
-BuildRequires : pytz
-BuildRequires : regex
-BuildRequires : requests
-BuildRequires : requests-oauthlib
-BuildRequires : requests-toolbelt
-BuildRequires : ruamel.yaml
-BuildRequires : ruamel.yaml.clib
-BuildRequires : scp
-BuildRequires : simplejson
-BuildRequires : six
-BuildRequires : toml
-BuildRequires : urllib3
-BuildRequires : voluptuous
-BuildRequires : wcwidth
-BuildRequires : wheel
-BuildRequires : wrapt
-BuildRequires : xmltodict
-BuildRequires : zipp
 
 %description
 *******
@@ -191,7 +165,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1636494543
+export SOURCE_DATE_EPOCH=1641521192
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
