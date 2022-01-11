@@ -1,7 +1,7 @@
 # This file contains build requirements that get picked up but are
 # undesirable. One entry per line, no whitespace.
-ansible
 python
+pypi(ansible)
 pypi(ansible_pylibssh)
 pypi(api_object_schema)
 pypi(capacity)
