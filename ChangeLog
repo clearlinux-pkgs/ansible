@@ -1,5 +1,5 @@
-ansible (5.2.0-1) unstable; urgency=medium
+ansible (5.3.0-1) unstable; urgency=medium
 
-  * Ansible 5.2.0 release
+  * Ansible 5.3.0 release
 
- -- Red Hat, Inc. <info@ansible.com>  Wed, 12 Jan 2022 19:56:06 +0000
+ -- Red Hat, Inc. <info@ansible.com>  Tue, 01 Feb 2022 17:08:21 +0000
