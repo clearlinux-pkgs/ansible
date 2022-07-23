@@ -6,7 +6,7 @@
 #
 Name     : ansible
 Version  : 6.1.0
-Release  : 155
+Release  : 156
 URL      : https://files.pythonhosted.org/packages/b6/f1/aaf318c3c1276c5582a8d0f6d1d29e9dba20d8a5232f79ad2a9b441c157f/ansible-6.1.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/b6/f1/aaf318c3c1276c5582a8d0f6d1d29e9dba20d8a5232f79ad2a9b441c157f/ansible-6.1.0.tar.gz
 Source1  : https://files.pythonhosted.org/packages/b6/f1/aaf318c3c1276c5582a8d0f6d1d29e9dba20d8a5232f79ad2a9b441c157f/ansible-6.1.0.tar.gz.asc
@@ -130,6 +130,7 @@ BuildRequires : pypi(xmljson)
 BuildRequires : pypi(xmltodict)
 BuildRequires : pypi(zabbix_api)
 BuildRequires : pypi(zipp)
+Patch1: backport-fix-shebangs.patch
 
 %description
 This Ansible collection is to manage all ovirt modules and inventory
@@ -284,6 +285,7 @@ python3 components for the ansible package.
 %prep
 %setup -q -n ansible-6.1.0
 cd %{_builddir}/ansible-6.1.0
+%patch1 -p1
 pushd ..
 cp -a ansible-6.1.0 buildavx2
 popd
@@ -293,7 +295,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1658535311
+export SOURCE_DATE_EPOCH=1658545077
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
