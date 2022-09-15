@@ -5,14 +5,14 @@
 # Source0 file verified with key 0xD05E6034F8B58C16 (ansible-gha@redhat.com)
 #
 Name     : ansible
-Version  : 6.1.0
-Release  : 156
-URL      : https://files.pythonhosted.org/packages/b6/f1/aaf318c3c1276c5582a8d0f6d1d29e9dba20d8a5232f79ad2a9b441c157f/ansible-6.1.0.tar.gz
-Source0  : https://files.pythonhosted.org/packages/b6/f1/aaf318c3c1276c5582a8d0f6d1d29e9dba20d8a5232f79ad2a9b441c157f/ansible-6.1.0.tar.gz
-Source1  : https://files.pythonhosted.org/packages/b6/f1/aaf318c3c1276c5582a8d0f6d1d29e9dba20d8a5232f79ad2a9b441c157f/ansible-6.1.0.tar.gz.asc
+Version  : 6.4.0
+Release  : 157
+URL      : https://files.pythonhosted.org/packages/d4/d4/4b28293b58fd238a27bd8b4ad8593056be2f22a8b6690030ad6919654dec/ansible-6.4.0.tar.gz
+Source0  : https://files.pythonhosted.org/packages/d4/d4/4b28293b58fd238a27bd8b4ad8593056be2f22a8b6690030ad6919654dec/ansible-6.4.0.tar.gz
+Source1  : https://files.pythonhosted.org/packages/d4/d4/4b28293b58fd238a27bd8b4ad8593056be2f22a8b6690030ad6919654dec/ansible-6.4.0.tar.gz.asc
 Summary  : Radically simple IT automation
 Group    : Development/Tools
-License  : Apache-2.0 GPL-2.0 GPL-3.0 GPL-3.0+ MIT Python-2.0
+License  : Apache-2.0 BSD-2-Clause BSD-3-Clause GPL-2.0 GPL-3.0 GPL-3.0+ MIT MPL-2.0 MPL-2.0-no-copyleft-exception Python-2.0
 Requires: ansible-bin = %{version}-%{release}
 Requires: ansible-license = %{version}-%{release}
 Requires: ansible-python = %{version}-%{release}
@@ -52,6 +52,7 @@ BuildRequires : pypi(dataclasses)
 BuildRequires : pypi(dnacentersdk)
 BuildRequires : pypi(docker)
 BuildRequires : pypi(google_auth)
+BuildRequires : pypi(grpcio)
 BuildRequires : pypi(idna)
 BuildRequires : pypi(importlib_metadata)
 BuildRequires : pypi(infi.dtypes.iqn)
@@ -88,6 +89,7 @@ BuildRequires : pypi(pbr)
 BuildRequires : pypi(platformdirs)
 BuildRequires : pypi(pluggy)
 BuildRequires : pypi(poetry_core)
+BuildRequires : pypi(protobuf)
 BuildRequires : pypi(purestorage)
 BuildRequires : pypi(purity_fb)
 BuildRequires : pypi(py)
@@ -100,6 +102,7 @@ BuildRequires : pypi(pyopenssl)
 BuildRequires : pypi(pyparsing)
 BuildRequires : pypi(pysnow)
 BuildRequires : pypi(python_dateutil)
+BuildRequires : pypi(python_version)
 BuildRequires : pypi(pytz)
 BuildRequires : pypi(pywinrm)
 BuildRequires : pypi(pyyaml)
@@ -130,7 +133,6 @@ BuildRequires : pypi(xmljson)
 BuildRequires : pypi(xmltodict)
 BuildRequires : pypi(zabbix_api)
 BuildRequires : pypi(zipp)
-Patch1: backport-fix-shebangs.patch
 
 %description
 This Ansible collection is to manage all ovirt modules and inventory
@@ -201,6 +203,7 @@ Requires: pypi(dataclasses)
 Requires: pypi(dnacentersdk)
 Requires: pypi(docker)
 Requires: pypi(google_auth)
+Requires: pypi(grpcio)
 Requires: pypi(idna)
 Requires: pypi(importlib_metadata)
 Requires: pypi(infi.dtypes.iqn)
@@ -235,6 +238,7 @@ Requires: pypi(paramiko)
 Requires: pypi(pathspec)
 Requires: pypi(platformdirs)
 Requires: pypi(pluggy)
+Requires: pypi(protobuf)
 Requires: pypi(purestorage)
 Requires: pypi(purity_fb)
 Requires: pypi(py)
@@ -247,6 +251,7 @@ Requires: pypi(pyopenssl)
 Requires: pypi(pyparsing)
 Requires: pypi(pysnow)
 Requires: pypi(python_dateutil)
+Requires: pypi(python_version)
 Requires: pypi(pytz)
 Requires: pypi(pywinrm)
 Requires: pypi(pyyaml)
@@ -283,11 +288,10 @@ python3 components for the ansible package.
 
 
 %prep
-%setup -q -n ansible-6.1.0
-cd %{_builddir}/ansible-6.1.0
-%patch1 -p1
+%setup -q -n ansible-6.4.0
+cd %{_builddir}/ansible-6.4.0
 pushd ..
-cp -a ansible-6.1.0 buildavx2
+cp -a ansible-6.4.0 buildavx2
 popd
 
 %build
@@ -295,7 +299,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1658545077
+export SOURCE_DATE_EPOCH=1663265320
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -341,6 +345,7 @@ cp %{_builddir}/ansible-%{version}/ansible_collections/cisco/intersight/LICENSE.
 cp %{_builddir}/ansible-%{version}/ansible_collections/cisco/ios/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
 cp %{_builddir}/ansible-%{version}/ansible_collections/cisco/iosxr/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
 cp %{_builddir}/ansible-%{version}/ansible_collections/cisco/ise/LICENSE %{buildroot}/usr/share/package-licenses/ansible/e197a1b2f214135d9b6716eab7f07c30511063b1
+cp %{_builddir}/ansible-%{version}/ansible_collections/cisco/meraki/COPYING %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
 cp %{_builddir}/ansible-%{version}/ansible_collections/cisco/mso/LICENSE %{buildroot}/usr/share/package-licenses/ansible/2e71dbd548f00d2365bdfc32072909fbc5703db6
 cp %{_builddir}/ansible-%{version}/ansible_collections/cisco/nso/LICENSE %{buildroot}/usr/share/package-licenses/ansible/37cfd8ca335069ea657b6cfd2eac89cdd2954561
 cp %{_builddir}/ansible-%{version}/ansible_collections/cisco/nxos/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
@@ -351,20 +356,277 @@ cp %{_builddir}/ansible-%{version}/ansible_collections/community/aws/COPYING %{b
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/azure/COPYING %{buildroot}/usr/share/package-licenses/ansible/338650eb7a42dd9bc1f1c6961420f2633b24932d
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/ciscosmb/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/crypto/COPYING %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
-cp %{_builddir}/ansible-%{version}/ansible_collections/community/crypto/PSF-license.txt %{buildroot}/usr/share/package-licenses/ansible/e9665a5e46702a4080c47049e29edf05eb70bfd6
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/crypto/LICENSES/Apache-2.0.txt %{buildroot}/usr/share/package-licenses/ansible/de33ead2bee64352544ce0aa9e410c0c44fdf7d9
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/crypto/LICENSES/BSD-2-Clause.txt %{buildroot}/usr/share/package-licenses/ansible/964a86ea34677b9cf55c3c92f65bf279efbb12c6
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/crypto/LICENSES/BSD-3-Clause.txt %{buildroot}/usr/share/package-licenses/ansible/ea5b412c09f3b29ba1d81a61b878c5c16ffe69d8
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/crypto/LICENSES/GPL-3.0-or-later.txt %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/crypto/LICENSES/PSF-2.0.txt %{buildroot}/usr/share/package-licenses/ansible/e9665a5e46702a4080c47049e29edf05eb70bfd6
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/digitalocean/COPYING %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/dns/CHANGELOG.rst.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/dns/COPYING %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/dns/LICENSES/GPL-3.0-or-later.txt %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/dns/LICENSES/MPL-2.0.txt %{buildroot}/usr/share/package-licenses/ansible/d22157abc0fc0b4ae96380c09528e23cf77290a9
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/dns/changelogs/changelog.yaml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/dns/plugins/public_suffix_list.dat.license %{buildroot}/usr/share/package-licenses/ansible/c64c550d06b626bad1179a574a9ffd3379b16d2a
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/dns/tests/sanity/extra/extra-docs.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/dns/tests/sanity/extra/licenses.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/dns/tests/sanity/extra/licenses.py.license %{buildroot}/usr/share/package-licenses/ansible/dc1ce8ce177e3884fa63185447f9953cd7eff0b4
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/dns/tests/sanity/extra/no-unwanted-files.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/dns/tests/sanity/extra/update-docs-fragments.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/dns/tests/sanity/ignore-2.10.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/dns/tests/sanity/ignore-2.11.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/dns/tests/sanity/ignore-2.12.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/dns/tests/sanity/ignore-2.13.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/dns/tests/sanity/ignore-2.14.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/dns/tests/sanity/ignore-2.9.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/docker/COPYING %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/docker/PSF-license.txt %{buildroot}/usr/share/package-licenses/ansible/e9665a5e46702a4080c47049e29edf05eb70bfd6
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/fortios/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/CHANGELOG.rst.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/COPYING %{buildroot}/usr/share/package-licenses/ansible/338650eb7a42dd9bc1f1c6961420f2633b24932d
-cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/PSF-license.txt %{buildroot}/usr/share/package-licenses/ansible/e9665a5e46702a4080c47049e29edf05eb70bfd6
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/LICENSES/BSD-2-Clause.txt %{buildroot}/usr/share/package-licenses/ansible/964a86ea34677b9cf55c3c92f65bf279efbb12c6
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/LICENSES/GPL-3.0-or-later.txt %{buildroot}/usr/share/package-licenses/ansible/338650eb7a42dd9bc1f1c6961420f2633b24932d
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/LICENSES/MIT.txt %{buildroot}/usr/share/package-licenses/ansible/adadb67a9875aeeac285309f1eab6e47d9ee08a7
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/LICENSES/PSF-2.0.txt %{buildroot}/usr/share/package-licenses/ansible/e9665a5e46702a4080c47049e29edf05eb70bfd6
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/changelogs/changelog.yaml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/iso_extract/files/test.iso.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/java_cert/files/testpkcs.p12.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/lookup_collection_version/collections/ansible_collections/testns/testcoll_mf/FILES.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/lookup_collection_version/collections/ansible_collections/testns/testcoll_mf/MANIFEST.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/lookup_passwordstore/templates/input.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/one_host/files/testhost/tmp/opennebula-fixtures.json.gz.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/one_template/files/testhost/tmp/opennebula-fixtures.json.gz.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/pkgng/templates/MANIFEST.json.j2.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/setup_flatpak_remote/files/repo.tar.xz.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/setup_openldap/files/initial_config.ldif.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/setup_openldap/files/rootpw_cnconfig.ldif.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/setup_postgresql_db/files/dummy.control.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/xml/fixtures/ansible-xml-beers-unicode.xml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/xml/fixtures/ansible-xml-beers.xml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/xml/fixtures/ansible-xml-namespaced-beers.xml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/xml/results/test-add-children-elements-unicode.xml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/xml/results/test-add-children-elements.xml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/xml/results/test-add-children-from-groupvars.xml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/xml/results/test-add-children-insertafter.xml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/xml/results/test-add-children-insertbefore.xml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/xml/results/test-add-children-with-attributes-unicode.xml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/xml/results/test-add-children-with-attributes.xml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/xml/results/test-add-element-implicitly.xml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/xml/results/test-add-namespaced-children-elements.xml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/xml/results/test-pretty-print-only.xml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/xml/results/test-pretty-print.xml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/xml/results/test-remove-attribute.xml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/xml/results/test-remove-element.xml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/xml/results/test-remove-namespaced-attribute.xml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/xml/results/test-remove-namespaced-element.xml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/xml/results/test-set-attribute-value-unicode.xml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/xml/results/test-set-attribute-value.xml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/xml/results/test-set-children-elements-level.xml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/xml/results/test-set-children-elements-unicode.xml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/xml/results/test-set-children-elements.xml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/xml/results/test-set-element-value-empty.xml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/xml/results/test-set-element-value-unicode.xml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/xml/results/test-set-element-value.xml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/xml/results/test-set-namespaced-attribute-value.xml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/xml/results/test-set-namespaced-element-value.xml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/zypper/files/empty.spec.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/sanity/extra/aliases.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/sanity/extra/botmeta.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/sanity/extra/extra-docs.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/sanity/extra/licenses.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/sanity/extra/licenses.py.license %{buildroot}/usr/share/package-licenses/ansible/dc1ce8ce177e3884fa63185447f9953cd7eff0b4
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/sanity/extra/no-unwanted-files.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/sanity/ignore-2.11.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/sanity/ignore-2.12.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/sanity/ignore-2.13.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/sanity/ignore-2.14.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/inventory/fixtures/lxd_inventory.atd.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/inventory/fixtures/opennebula_inventory.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/module_utils/xenserver/fixtures/ansible-test-vm-1-facts.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/module_utils/xenserver/fixtures/ansible-test-vm-1-params.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/module_utils/xenserver/fixtures/ansible-test-vm-2-facts.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/module_utils/xenserver/fixtures/ansible-test-vm-2-params.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/module_utils/xenserver/fixtures/ansible-test-vm-3-facts.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/module_utils/xenserver/fixtures/ansible-test-vm-3-params.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/address_family.test_no_changes.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/address_family.test_no_changes.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/address_family_add_aggi_up.exceptions.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/address_family_add_aggi_up.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/address_family_add_aggi_up.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/address_family_add_aggi_up_twice.exceptions.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/address_family_add_aggi_up_twice.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/address_family_add_aggi_up_twice.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/address_family_add_and_delete_aggi_up.exceptions.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/address_family_add_and_delete_aggi_up.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/address_family_add_and_delete_aggi_up.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/address_family_aggi_remove_dup.exceptions.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/address_family_aggi_remove_dup.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/address_family_aggi_remove_dup.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/address_family_change_ipv4.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/address_family_change_ipv4.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/address_family_change_ipv4_post_up.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/address_family_change_ipv4_post_up.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/address_family_change_ipv4_pre_up.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/address_family_change_ipv4_pre_up.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/address_family_change_ipv6.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/address_family_change_ipv6.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/address_family_change_ipv6_post_up.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/address_family_change_ipv6_post_up.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/address_family_change_ipv6_pre_up.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/address_family_change_ipv6_pre_up.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/address_family_change_method.exceptions.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/address_family_change_method.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/address_family_change_method.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/address_family_revert.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/address_family_revert.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/address_family_set_aggi_and_eth0_mtu.exceptions.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/address_family_set_aggi_and_eth0_mtu.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/address_family_set_aggi_and_eth0_mtu.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/address_family_set_aggi_slaves.exceptions.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/address_family_set_aggi_slaves.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/address_family_set_aggi_slaves.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/default_dhcp.test_no_changes.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/default_dhcp.test_no_changes.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/default_dhcp_add_aggi_up.exceptions.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/default_dhcp_add_aggi_up.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/default_dhcp_add_aggi_up.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/default_dhcp_add_aggi_up_twice.exceptions.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/default_dhcp_add_aggi_up_twice.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/default_dhcp_add_aggi_up_twice.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/default_dhcp_add_and_delete_aggi_up.exceptions.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/default_dhcp_add_and_delete_aggi_up.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/default_dhcp_add_and_delete_aggi_up.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/default_dhcp_aggi_remove_dup.exceptions.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/default_dhcp_aggi_remove_dup.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/default_dhcp_aggi_remove_dup.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/default_dhcp_change_ipv4.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/default_dhcp_change_ipv4.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/default_dhcp_change_ipv4_post_up.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/default_dhcp_change_ipv4_post_up.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/default_dhcp_change_ipv4_pre_up.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/default_dhcp_change_ipv4_pre_up.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/default_dhcp_change_ipv6.exceptions.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/default_dhcp_change_ipv6.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/default_dhcp_change_ipv6.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/default_dhcp_change_ipv6_post_up.exceptions.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/default_dhcp_change_ipv6_post_up.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/default_dhcp_change_ipv6_post_up.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/default_dhcp_change_ipv6_pre_up.exceptions.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/default_dhcp_change_ipv6_pre_up.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/default_dhcp_change_ipv6_pre_up.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/default_dhcp_change_method.exceptions.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/default_dhcp_change_method.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/default_dhcp_change_method.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/default_dhcp_revert.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/default_dhcp_revert.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/default_dhcp_set_aggi_and_eth0_mtu.exceptions.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/default_dhcp_set_aggi_and_eth0_mtu.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/default_dhcp_set_aggi_and_eth0_mtu.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/default_dhcp_set_aggi_slaves.exceptions.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/default_dhcp_set_aggi_slaves.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/default_dhcp_set_aggi_slaves.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/servers.com.test_no_changes.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/servers.com.test_no_changes.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/servers.com_add_aggi_up.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/servers.com_add_aggi_up.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/servers.com_add_aggi_up_twice.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/servers.com_add_aggi_up_twice.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/servers.com_add_and_delete_aggi_up.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/servers.com_add_and_delete_aggi_up.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/servers.com_aggi_remove_dup.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/servers.com_aggi_remove_dup.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/servers.com_change_ipv4.exceptions.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/servers.com_change_ipv4.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/servers.com_change_ipv4.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/servers.com_change_ipv4_post_up.exceptions.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/servers.com_change_ipv4_post_up.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/servers.com_change_ipv4_post_up.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/servers.com_change_ipv4_pre_up.exceptions.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/servers.com_change_ipv4_pre_up.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/servers.com_change_ipv4_pre_up.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/servers.com_change_ipv6.exceptions.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/servers.com_change_ipv6.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/servers.com_change_ipv6.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/servers.com_change_ipv6_post_up.exceptions.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/servers.com_change_ipv6_post_up.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/servers.com_change_ipv6_post_up.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/servers.com_change_ipv6_pre_up.exceptions.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/servers.com_change_ipv6_pre_up.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/servers.com_change_ipv6_pre_up.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/servers.com_change_method.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/servers.com_change_method.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/servers.com_revert.exceptions.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/servers.com_revert.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/servers.com_revert.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/servers.com_set_aggi_and_eth0_mtu.exceptions.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/servers.com_set_aggi_and_eth0_mtu.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/servers.com_set_aggi_and_eth0_mtu.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/servers.com_set_aggi_slaves.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/servers.com_set_aggi_slaves.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/up_down_dup.test_no_changes.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/up_down_dup.test_no_changes.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/up_down_dup_add_aggi_up.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/up_down_dup_add_aggi_up.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/up_down_dup_add_aggi_up_twice.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/up_down_dup_add_aggi_up_twice.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/up_down_dup_add_and_delete_aggi_up.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/up_down_dup_add_and_delete_aggi_up.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/up_down_dup_aggi_remove_dup.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/up_down_dup_aggi_remove_dup.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/up_down_dup_change_ipv4.exceptions.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/up_down_dup_change_ipv4.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/up_down_dup_change_ipv4.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/up_down_dup_change_ipv4_post_up.exceptions.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/up_down_dup_change_ipv4_post_up.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/up_down_dup_change_ipv4_post_up.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/up_down_dup_change_ipv4_pre_up.exceptions.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/up_down_dup_change_ipv4_pre_up.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/up_down_dup_change_ipv4_pre_up.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/up_down_dup_change_ipv6.exceptions.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/up_down_dup_change_ipv6.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/up_down_dup_change_ipv6.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/up_down_dup_change_ipv6_post_up.exceptions.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/up_down_dup_change_ipv6_post_up.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/up_down_dup_change_ipv6_post_up.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/up_down_dup_change_ipv6_pre_up.exceptions.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/up_down_dup_change_ipv6_pre_up.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/up_down_dup_change_ipv6_pre_up.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/up_down_dup_change_method.exceptions.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/up_down_dup_change_method.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/up_down_dup_change_method.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/up_down_dup_revert.exceptions.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/up_down_dup_revert.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/up_down_dup_revert.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/up_down_dup_set_aggi_and_eth0_mtu.exceptions.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/up_down_dup_set_aggi_and_eth0_mtu.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/up_down_dup_set_aggi_and_eth0_mtu.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/up_down_dup_set_aggi_slaves.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/golden_output/up_down_dup_set_aggi_slaves.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/input/address_family.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/input/default_dhcp.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/input/servers.com.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/unit/plugins/modules/system/interfaces_file/fixtures/input/up_down_dup.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/google/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/grafana/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/hashi_vault/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/hashi_vault/LICENSES/BSD-2-Clause.txt %{buildroot}/usr/share/package-licenses/ansible/27b42abb6f497e50731b0e75678d25241f58bd90
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/hashi_vault/LICENSES/GPL-3.0-or-later.txt %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/hrobot/CHANGELOG.rst.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/hrobot/COPYING %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
-cp %{_builddir}/ansible-%{version}/ansible_collections/community/libvirt/COPYING %{buildroot}/usr/share/package-licenses/ansible/338650eb7a42dd9bc1f1c6961420f2633b24932d
-cp %{_builddir}/ansible-%{version}/ansible_collections/community/libvirt/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/hrobot/LICENSES/BSD-2-Clause.txt %{buildroot}/usr/share/package-licenses/ansible/964a86ea34677b9cf55c3c92f65bf279efbb12c6
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/hrobot/LICENSES/GPL-3.0-or-later.txt %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/hrobot/changelogs/changelog.yaml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/hrobot/tests/sanity/extra/extra-docs.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/hrobot/tests/sanity/extra/licenses.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/hrobot/tests/sanity/extra/licenses.py.license %{buildroot}/usr/share/package-licenses/ansible/dc1ce8ce177e3884fa63185447f9953cd7eff0b4
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/hrobot/tests/sanity/extra/no-unwanted-files.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/hrobot/tests/sanity/ignore-2.10.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/hrobot/tests/sanity/ignore-2.11.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/hrobot/tests/sanity/ignore-2.12.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/hrobot/tests/sanity/ignore-2.13.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/hrobot/tests/sanity/ignore-2.14.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/hrobot/tests/sanity/ignore-2.9.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/libvirt/COPYING %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/mongodb/COPYING %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/mysql/COPYING %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/mysql/PSF-license.txt %{buildroot}/usr/share/package-licenses/ansible/e9665a5e46702a4080c47049e29edf05eb70bfd6
@@ -376,14 +638,99 @@ cp %{_builddir}/ansible-%{version}/ansible_collections/community/postgresql/PSF-
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/proxysql/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/rabbitmq/COPYING %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/rabbitmq/PSF-license.txt %{buildroot}/usr/share/package-licenses/ansible/e9665a5e46702a4080c47049e29edf05eb70bfd6
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/routeros/CHANGELOG.rst.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/routeros/COPYING %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/routeros/LICENSES/BSD-2-Clause.txt %{buildroot}/usr/share/package-licenses/ansible/964a86ea34677b9cf55c3c92f65bf279efbb12c6
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/routeros/LICENSES/GPL-3.0-or-later.txt %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/routeros/changelogs/changelog.yaml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/routeros/tests/sanity/extra/extra-docs.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/routeros/tests/sanity/extra/licenses.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/routeros/tests/sanity/extra/licenses.py.license %{buildroot}/usr/share/package-licenses/ansible/dc1ce8ce177e3884fa63185447f9953cd7eff0b4
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/routeros/tests/sanity/extra/no-unwanted-files.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/routeros/tests/sanity/extra/update-docs.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/routeros/tests/sanity/ignore-2.10.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/routeros/tests/sanity/ignore-2.11.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/routeros/tests/sanity/ignore-2.12.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/routeros/tests/sanity/ignore-2.13.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/routeros/tests/sanity/ignore-2.14.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/routeros/tests/sanity/ignore-2.9.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/routeros/tests/unit/plugins/modules/fixtures/facts/export.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/routeros/tests/unit/plugins/modules/fixtures/facts/export_verbose.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/routeros/tests/unit/plugins/modules/fixtures/facts/interface_print_detail_without-paging.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/routeros/tests/unit/plugins/modules/fixtures/facts/ip_address_print_detail_without-paging.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/routeros/tests/unit/plugins/modules/fixtures/facts/ip_neighbor_print_detail_without-paging.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/routeros/tests/unit/plugins/modules/fixtures/facts/ip_route_print_detail_without-paging.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/routeros/tests/unit/plugins/modules/fixtures/facts/ipv6_address_print_detail_without-paging.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/routeros/tests/unit/plugins/modules/fixtures/facts/ipv6_address_print_detail_without-paging_no-ipv6.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/routeros/tests/unit/plugins/modules/fixtures/facts/routing_bgp_instance_print_detail_without-paging.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/routeros/tests/unit/plugins/modules/fixtures/facts/routing_bgp_peer_print_detail_without-paging.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/routeros/tests/unit/plugins/modules/fixtures/facts/routing_bgp_vpnv4-route_print_detail_without-paging.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/routeros/tests/unit/plugins/modules/fixtures/facts/routing_ospf_instance_print_detail_without-paging.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/routeros/tests/unit/plugins/modules/fixtures/facts/routing_ospf_neighbor_print_detail_without-paging.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/routeros/tests/unit/plugins/modules/fixtures/facts/system_identity_print_without-paging.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/routeros/tests/unit/plugins/modules/fixtures/facts/system_resource_print_without-paging.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/routeros/tests/unit/plugins/modules/fixtures/facts/system_routerboard_print_without-paging.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/routeros/tests/unit/plugins/modules/fixtures/system_package_print.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/routeros/tests/unit/plugins/modules/fixtures/system_resource_print.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/sap/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
-cp %{_builddir}/ansible-%{version}/ansible_collections/community/sap_libs/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sap_libs/LICENSE %{buildroot}/usr/share/package-licenses/ansible/7df059597099bb7dcf25d2a9aedfaf4465f72d8d
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/skydive/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/.github/pull_request_template.md.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/CHANGELOG.rst.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/COPYING %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/LICENSES/BSD-2-Clause.txt %{buildroot}/usr/share/package-licenses/ansible/964a86ea34677b9cf55c3c92f65bf279efbb12c6
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/LICENSES/GPL-3.0-or-later.txt %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/changelogs/changelog.yaml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/integration/targets/filter_decrypt/files/binary.sops.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/integration/targets/filter_decrypt/files/hidden-binary-yaml.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/integration/targets/filter_decrypt/files/hidden-binary-yaml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/integration/targets/filter_decrypt/files/hidden-binary-yaml.yaml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/integration/targets/filter_decrypt/files/hidden-binary.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/integration/targets/filter_decrypt/files/hidden-binary.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/integration/targets/filter_decrypt/files/hidden-binary.yaml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/integration/targets/filter_decrypt/files/hidden-json.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/integration/targets/filter_decrypt/files/hidden-json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/integration/targets/filter_decrypt/files/hidden-json.yaml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/integration/targets/filter_decrypt/files/hidden-yaml.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/integration/targets/filter_decrypt/files/hidden-yaml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/integration/targets/filter_decrypt/files/hidden-yaml.yaml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/integration/targets/filter_decrypt/files/rstrip.sops.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/integration/targets/filter_decrypt/files/simple.sops.yaml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/integration/targets/load_vars/vars/empty.sops.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/integration/targets/lookup_sops/files/binary.sops.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/integration/targets/lookup_sops/files/hidden-binary-yaml.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/integration/targets/lookup_sops/files/hidden-binary-yaml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/integration/targets/lookup_sops/files/hidden-binary-yaml.yaml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/integration/targets/lookup_sops/files/hidden-binary.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/integration/targets/lookup_sops/files/hidden-binary.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/integration/targets/lookup_sops/files/hidden-binary.yaml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/integration/targets/lookup_sops/files/hidden-json.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/integration/targets/lookup_sops/files/hidden-json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/integration/targets/lookup_sops/files/hidden-json.yaml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/integration/targets/lookup_sops/files/hidden-yaml.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/integration/targets/lookup_sops/files/hidden-yaml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/integration/targets/lookup_sops/files/hidden-yaml.yaml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/integration/targets/lookup_sops/files/rstrip.sops.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/integration/targets/lookup_sops/files/simple.sops.yaml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/integration/targets/lookup_sops/files/wrong.yaml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/integration/targets/sops_encrypt/files/broken-json-yaml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/integration/targets/var_sops/test-success/host_vars/localhost.sops.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/sanity/extra/extra-docs.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/sanity/extra/licenses.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/sanity/extra/licenses.py.license %{buildroot}/usr/share/package-licenses/ansible/dc1ce8ce177e3884fa63185447f9953cd7eff0b4
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/sanity/extra/no-unwanted-files.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/sanity/ignore-2.10.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/sanity/ignore-2.11.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/sanity/ignore-2.12.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/sanity/ignore-2.13.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/sanity/ignore-2.14.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/sanity/ignore-2.9.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/vmware/COPYING %{buildroot}/usr/share/package-licenses/ansible/338650eb7a42dd9bc1f1c6961420f2633b24932d
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/vmware/LICENSE %{buildroot}/usr/share/package-licenses/ansible/338650eb7a42dd9bc1f1c6961420f2633b24932d
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/vmware/LICENSES/BSD-2-Clause.txt %{buildroot}/usr/share/package-licenses/ansible/964a86ea34677b9cf55c3c92f65bf279efbb12c6
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/vmware/LICENSES/GPL-3.0-or-later.txt %{buildroot}/usr/share/package-licenses/ansible/338650eb7a42dd9bc1f1c6961420f2633b24932d
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/windows/COPYING %{buildroot}/usr/share/package-licenses/ansible/338650eb7a42dd9bc1f1c6961420f2633b24932d
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/windows/tests/integration/targets/win_psmodule/files/module/license.txt %{buildroot}/usr/share/package-licenses/ansible/2c7ce4b4ba7a5546dc13a6282b66a2a583abe4e4
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/zabbix/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/zabbix/PSF-license.txt %{buildroot}/usr/share/package-licenses/ansible/e9665a5e46702a4080c47049e29edf05eb70bfd6
 cp %{_builddir}/ansible-%{version}/ansible_collections/containers/podman/COPYING %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
@@ -472,8 +819,10 @@ cp %{_builddir}/ansible-%{version}/ansible_collections/google/cloud/LICENSE %{bu
 cp %{_builddir}/ansible-%{version}/ansible_collections/google/cloud/roles/gcloud/LICENSE %{buildroot}/usr/share/package-licenses/ansible/33ab7ec85799c08d1863b02a5aa30c32fb799dca
 cp %{_builddir}/ansible-%{version}/ansible_collections/hetzner/hcloud/COPYING %{buildroot}/usr/share/package-licenses/ansible/338650eb7a42dd9bc1f1c6961420f2633b24932d
 cp %{_builddir}/ansible-%{version}/ansible_collections/ibm/qradar/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
+cp %{_builddir}/ansible-%{version}/ansible_collections/ibm/spectrum_virtualize/LICENSE %{buildroot}/usr/share/package-licenses/ansible/7bc5474bacf20ef085e04ded37c5e604c197cf07
 cp %{_builddir}/ansible-%{version}/ansible_collections/infinidat/infinibox/LICENSE %{buildroot}/usr/share/package-licenses/ansible/b04f164721ecb9138e854f0c541806c85c2d5e56
 cp %{_builddir}/ansible-%{version}/ansible_collections/infoblox/nios_modules/COPYING %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
+cp %{_builddir}/ansible-%{version}/ansible_collections/inspur/ispim/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
 cp %{_builddir}/ansible-%{version}/ansible_collections/inspur/sm/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
 cp %{_builddir}/ansible-%{version}/ansible_collections/junipernetworks/junos/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
 cp %{_builddir}/ansible-%{version}/ansible_collections/kubernetes/core/LICENSE %{buildroot}/usr/share/package-licenses/ansible/7bc5474bacf20ef085e04ded37c5e604c197cf07
@@ -483,7 +832,7 @@ cp %{_builddir}/ansible-%{version}/ansible_collections/netapp/aws/COPYING %{buil
 cp %{_builddir}/ansible-%{version}/ansible_collections/netapp/azure/COPYING %{buildroot}/usr/share/package-licenses/ansible/8624bcdae55baeef00cd11d5dfcfa60f68710a02
 cp %{_builddir}/ansible-%{version}/ansible_collections/netapp/cloudmanager/COPYING %{buildroot}/usr/share/package-licenses/ansible/8624bcdae55baeef00cd11d5dfcfa60f68710a02
 cp %{_builddir}/ansible-%{version}/ansible_collections/netapp/ontap/COPYING %{buildroot}/usr/share/package-licenses/ansible/1de7bacb4fbbd7b6d391a69abfe174c2509ec303
-cp %{_builddir}/ansible-%{version}/ansible_collections/netapp/ontap/roles/na_ontap_cluster_config/LICENSE %{buildroot}/usr/share/package-licenses/ansible/a2f9ffbf32eeb6284afa81bc4fb4c27b80d044e9
+cp %{_builddir}/ansible-%{version}/ansible_collections/netapp/ontap/roles/na_ontap_cluster_config/LICENSE %{buildroot}/usr/share/package-licenses/ansible/1de7bacb4fbbd7b6d391a69abfe174c2509ec303
 cp %{_builddir}/ansible-%{version}/ansible_collections/netapp/ontap/roles/na_ontap_nas_create/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
 cp %{_builddir}/ansible-%{version}/ansible_collections/netapp/ontap/roles/na_ontap_san_create/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
 cp %{_builddir}/ansible-%{version}/ansible_collections/netapp/ontap/roles/na_ontap_vserver_create/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
@@ -497,14 +846,16 @@ cp %{_builddir}/ansible-%{version}/ansible_collections/openstack/cloud/COPYING %
 cp %{_builddir}/ansible-%{version}/ansible_collections/openvswitch/openvswitch/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
 cp %{_builddir}/ansible-%{version}/ansible_collections/ovirt/ovirt/licenses/Apache-license.txt %{buildroot}/usr/share/package-licenses/ansible/81538fac4f7316ad68eb3218e4c73a7172aac598
 cp %{_builddir}/ansible-%{version}/ansible_collections/ovirt/ovirt/licenses/GPL-license.txt %{buildroot}/usr/share/package-licenses/ansible/8624bcdae55baeef00cd11d5dfcfa60f68710a02
+cp %{_builddir}/ansible-%{version}/ansible_collections/purestorage/flashblade/COPYING.GPLv3 %{buildroot}/usr/share/package-licenses/ansible/8624bcdae55baeef00cd11d5dfcfa60f68710a02
+cp %{_builddir}/ansible-%{version}/ansible_collections/purestorage/flashblade/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
 cp %{_builddir}/ansible-%{version}/ansible_collections/purestorage/fusion/COPYING.GPLv3 %{buildroot}/usr/share/package-licenses/ansible/8624bcdae55baeef00cd11d5dfcfa60f68710a02
-cp %{_builddir}/ansible-%{version}/ansible_collections/purestorage/fusion/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
 cp %{_builddir}/ansible-%{version}/ansible_collections/sensu/sensu_go/COPYING %{buildroot}/usr/share/package-licenses/ansible/338650eb7a42dd9bc1f1c6961420f2633b24932d
 cp %{_builddir}/ansible-%{version}/ansible_collections/splunk/es/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
 cp %{_builddir}/ansible-%{version}/ansible_collections/t_systems_mms/icinga_director/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
 cp %{_builddir}/ansible-%{version}/ansible_collections/theforeman/foreman/LICENSE %{buildroot}/usr/share/package-licenses/ansible/8624bcdae55baeef00cd11d5dfcfa60f68710a02
 cp %{_builddir}/ansible-%{version}/ansible_collections/theforeman/foreman/PSF-license.txt %{buildroot}/usr/share/package-licenses/ansible/e9665a5e46702a4080c47049e29edf05eb70bfd6
 cp %{_builddir}/ansible-%{version}/ansible_collections/vmware/vmware_rest/LICENSE %{buildroot}/usr/share/package-licenses/ansible/338650eb7a42dd9bc1f1c6961420f2633b24932d
+cp %{_builddir}/ansible-%{version}/ansible_collections/vultr/cloud/COPYING %{buildroot}/usr/share/package-licenses/ansible/a6adc13d0c809ab8cb68e6e3b6eb7571bd0e2920
 cp %{_builddir}/ansible-%{version}/ansible_collections/vyos/vyos/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
 cp %{_builddir}/ansible-%{version}/debian/copyright %{buildroot}/usr/share/package-licenses/ansible/df7eb10107eae3c1fc58f5cfe07af25d35959132
 python3 -tt setup.py build  install --root=%{buildroot}
@@ -534,27 +885,37 @@ popd
 /usr/share/package-licenses/ansible/1de7bacb4fbbd7b6d391a69abfe174c2509ec303
 /usr/share/package-licenses/ansible/1e4dfa9285a1c1939618c127bff0b28a20415fcb
 /usr/share/package-licenses/ansible/22cf4767fdced6cc00395c3c56eefff73127d58c
+/usr/share/package-licenses/ansible/27b42abb6f497e50731b0e75678d25241f58bd90
+/usr/share/package-licenses/ansible/2c7ce4b4ba7a5546dc13a6282b66a2a583abe4e4
 /usr/share/package-licenses/ansible/2e71dbd548f00d2365bdfc32072909fbc5703db6
 /usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
 /usr/share/package-licenses/ansible/338650eb7a42dd9bc1f1c6961420f2633b24932d
 /usr/share/package-licenses/ansible/33ab7ec85799c08d1863b02a5aa30c32fb799dca
 /usr/share/package-licenses/ansible/37cfd8ca335069ea657b6cfd2eac89cdd2954561
 /usr/share/package-licenses/ansible/7bc5474bacf20ef085e04ded37c5e604c197cf07
+/usr/share/package-licenses/ansible/7df059597099bb7dcf25d2a9aedfaf4465f72d8d
 /usr/share/package-licenses/ansible/7fd6360e370eb278e4f6298b830a6d4024667aa7
 /usr/share/package-licenses/ansible/81538fac4f7316ad68eb3218e4c73a7172aac598
 /usr/share/package-licenses/ansible/8624bcdae55baeef00cd11d5dfcfa60f68710a02
 /usr/share/package-licenses/ansible/8eb83a42d183d11f2ab1e7e2041b9762e8d935c6
-/usr/share/package-licenses/ansible/a2f9ffbf32eeb6284afa81bc4fb4c27b80d044e9
+/usr/share/package-licenses/ansible/964a86ea34677b9cf55c3c92f65bf279efbb12c6
 /usr/share/package-licenses/ansible/a6adc13d0c809ab8cb68e6e3b6eb7571bd0e2920
+/usr/share/package-licenses/ansible/adadb67a9875aeeac285309f1eab6e47d9ee08a7
 /usr/share/package-licenses/ansible/b04f164721ecb9138e854f0c541806c85c2d5e56
 /usr/share/package-licenses/ansible/b21b197221daa7edc4bbf5880b2f774912d2455d
 /usr/share/package-licenses/ansible/b4d7662bb6b0b804c8fc94f7bc81f59dce0c36f3
+/usr/share/package-licenses/ansible/c64c550d06b626bad1179a574a9ffd3379b16d2a
 /usr/share/package-licenses/ansible/cc883360726c29a4550e1d0630318e86e5778235
+/usr/share/package-licenses/ansible/d22157abc0fc0b4ae96380c09528e23cf77290a9
+/usr/share/package-licenses/ansible/dc1ce8ce177e3884fa63185447f9953cd7eff0b4
 /usr/share/package-licenses/ansible/dc447a64136642636d7aa32e50c76e2465801c5f
+/usr/share/package-licenses/ansible/de33ead2bee64352544ce0aa9e410c0c44fdf7d9
 /usr/share/package-licenses/ansible/df7eb10107eae3c1fc58f5cfe07af25d35959132
 /usr/share/package-licenses/ansible/e197a1b2f214135d9b6716eab7f07c30511063b1
 /usr/share/package-licenses/ansible/e4851650c592eb694000404a0e066e41df28be1f
 /usr/share/package-licenses/ansible/e9665a5e46702a4080c47049e29edf05eb70bfd6
+/usr/share/package-licenses/ansible/ea5b412c09f3b29ba1d81a61b878c5c16ffe69d8
+/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
 /usr/share/package-licenses/ansible/f940ee84768beeb07c1094f57531ded0f1f28d23
 
 %files python

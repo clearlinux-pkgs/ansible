@@ -1,5 +1,9 @@
-ansible (6.1.0-1) unstable; urgency=medium
+# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
+# SPDX-License-Identifier: GPL-3.0-or-later
+# SPDX-FileCopyrightText: Ansible Project, 2020
 
-  * Ansible 6.1.0 release
+ansible (6.4.0-1) unstable; urgency=medium
 
- -- Red Hat, Inc. <info@ansible.com>  Tue, 12 Jul 2022 15:15:49 +0000
+  * Ansible 6.4.0 release
+
+ -- Red Hat, Inc. <info@ansible.com>  Thu, 15 Sep 2022 03:31:38 +0000
