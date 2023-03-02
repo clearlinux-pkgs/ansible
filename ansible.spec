@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xD05E6034F8B58C16 (ansible-gha@redhat.com)
 #
 Name     : ansible
-Version  : 7.1.0
-Release  : 161
-URL      : https://files.pythonhosted.org/packages/05/cd/d5c46caa5d8c6c11ebad76accd2cec355a10ba80c71780ecdf0bc6748a62/ansible-7.1.0.tar.gz
-Source0  : https://files.pythonhosted.org/packages/05/cd/d5c46caa5d8c6c11ebad76accd2cec355a10ba80c71780ecdf0bc6748a62/ansible-7.1.0.tar.gz
-Source1  : https://files.pythonhosted.org/packages/05/cd/d5c46caa5d8c6c11ebad76accd2cec355a10ba80c71780ecdf0bc6748a62/ansible-7.1.0.tar.gz.asc
+Version  : 7.3.0
+Release  : 162
+URL      : https://files.pythonhosted.org/packages/6a/56/e05719098bee5586302d88b52522588060ae8e421b0d054d87581edcd652/ansible-7.3.0.tar.gz
+Source0  : https://files.pythonhosted.org/packages/6a/56/e05719098bee5586302d88b52522588060ae8e421b0d054d87581edcd652/ansible-7.3.0.tar.gz
+Source1  : https://files.pythonhosted.org/packages/6a/56/e05719098bee5586302d88b52522588060ae8e421b0d054d87581edcd652/ansible-7.3.0.tar.gz.asc
 Summary  : Radically simple IT automation
 Group    : Development/Tools
 License  : Apache-2.0 BSD-2-Clause BSD-3-Clause GPL-2.0 GPL-3.0 GPL-3.0+ MIT MPL-2.0 MPL-2.0-no-copyleft-exception Python-2.0
@@ -52,6 +52,7 @@ BuildRequires : pypi(dataclasses)
 BuildRequires : pypi(dnacentersdk)
 BuildRequires : pypi(docker)
 BuildRequires : pypi(google_auth)
+BuildRequires : pypi(google_cloud_storage)
 BuildRequires : pypi(grpcio)
 BuildRequires : pypi(idna)
 BuildRequires : pypi(importlib_metadata)
@@ -98,6 +99,7 @@ BuildRequires : pypi(pycparser)
 BuildRequires : pypi(pynetbox)
 BuildRequires : pypi(pyopenssl)
 BuildRequires : pypi(pyparsing)
+BuildRequires : pypi(pypowerflex)
 BuildRequires : pypi(python_dateutil)
 BuildRequires : pypi(python_version)
 BuildRequires : pypi(pytz)
@@ -113,8 +115,10 @@ BuildRequires : pypi(ruamel.yaml.clib)
 BuildRequires : pypi(scp)
 BuildRequires : pypi(selectors2)
 BuildRequires : pypi(sentinels)
+BuildRequires : pypi(setuptools)
 BuildRequires : pypi(simplejson)
 BuildRequires : pypi(six)
+BuildRequires : pypi(storops)
 BuildRequires : pypi(textfsm)
 BuildRequires : pypi(toml)
 BuildRequires : pypi(tomli)
@@ -203,6 +207,7 @@ Requires: pypi(dataclasses)
 Requires: pypi(dnacentersdk)
 Requires: pypi(docker)
 Requires: pypi(google_auth)
+Requires: pypi(google_cloud_storage)
 Requires: pypi(grpcio)
 Requires: pypi(idna)
 Requires: pypi(importlib_metadata)
@@ -247,6 +252,7 @@ Requires: pypi(pycparser)
 Requires: pypi(pynetbox)
 Requires: pypi(pyopenssl)
 Requires: pypi(pyparsing)
+Requires: pypi(pypowerflex)
 Requires: pypi(python_dateutil)
 Requires: pypi(python_version)
 Requires: pypi(pytz)
@@ -264,6 +270,7 @@ Requires: pypi(selectors2)
 Requires: pypi(sentinels)
 Requires: pypi(simplejson)
 Requires: pypi(six)
+Requires: pypi(storops)
 Requires: pypi(textfsm)
 Requires: pypi(toml)
 Requires: pypi(tomli)
@@ -285,10 +292,10 @@ python3 components for the ansible package.
 
 
 %prep
-%setup -q -n ansible-7.1.0
-cd %{_builddir}/ansible-7.1.0
+%setup -q -n ansible-7.3.0
+cd %{_builddir}/ansible-7.3.0
 pushd ..
-cp -a ansible-7.1.0 buildavx2
+cp -a ansible-7.3.0 buildavx2
 popd
 
 %build
@@ -296,7 +303,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1673450832
+export SOURCE_DATE_EPOCH=1677771618
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -307,8 +314,7 @@ export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -f
 export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
 export MAKEFLAGS=%{?_smp_mflags}
 pypi-dep-fix.py . ansible-core
-python3 setup.py build
-
+python3 -m build --wheel --skip-dependency-check --no-isolation
 pushd ../buildavx2/
 export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
 export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
@@ -316,9 +322,10 @@ export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
 export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3 "
 export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3 "
 pypi-dep-fix.py . ansible-core
-python3 setup.py build
+python3 -m build --wheel --skip-dependency-check --no-isolation
 
 popd
+
 %install
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
@@ -458,6 +465,7 @@ cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/i
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/xml/results/test-remove-namespaced-element.xml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/xml/results/test-set-attribute-value-unicode.xml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/xml/results/test-set-attribute-value.xml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/xml/results/test-set-children-elements-empty-list.xml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/xml/results/test-set-children-elements-level.xml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/xml/results/test-set-children-elements-unicode.xml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/xml/results/test-set-children-elements.xml.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
@@ -854,12 +862,15 @@ cp %{_builddir}/ansible-%{version}/ansible_collections/dellemc/os9/roles/os9_vlt
 cp %{_builddir}/ansible-%{version}/ansible_collections/dellemc/os9/roles/os9_vrf/LICENSE %{buildroot}/usr/share/package-licenses/ansible/1e4dfa9285a1c1939618c127bff0b28a20415fcb || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/dellemc/os9/roles/os9_vrrp/LICENSE %{buildroot}/usr/share/package-licenses/ansible/1e4dfa9285a1c1939618c127bff0b28a20415fcb || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/dellemc/os9/roles/os9_xstp/LICENSE %{buildroot}/usr/share/package-licenses/ansible/1e4dfa9285a1c1939618c127bff0b28a20415fcb || :
+cp %{_builddir}/ansible-%{version}/ansible_collections/dellemc/powerflex/LICENSE %{buildroot}/usr/share/package-licenses/ansible/7bc5474bacf20ef085e04ded37c5e604c197cf07 || :
+cp %{_builddir}/ansible-%{version}/ansible_collections/dellemc/powerflex/MODULE-LICENSE %{buildroot}/usr/share/package-licenses/ansible/7df059597099bb7dcf25d2a9aedfaf4465f72d8d || :
+cp %{_builddir}/ansible-%{version}/ansible_collections/dellemc/unity/LICENSE %{buildroot}/usr/share/package-licenses/ansible/7bc5474bacf20ef085e04ded37c5e604c197cf07 || :
+cp %{_builddir}/ansible-%{version}/ansible_collections/dellemc/unity/MODULE-LICENSE %{buildroot}/usr/share/package-licenses/ansible/7df059597099bb7dcf25d2a9aedfaf4465f72d8d || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/f5networks/f5_modules/plugins/lookup/license_hopper.py %{buildroot}/usr/share/package-licenses/ansible/22cf4767fdced6cc00395c3c56eefff73127d58c || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/fortinet/fortios/LICENSE %{buildroot}/usr/share/package-licenses/ansible/338650eb7a42dd9bc1f1c6961420f2633b24932d || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/frr/frr/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/gluster/gluster/LICENSE %{buildroot}/usr/share/package-licenses/ansible/e4851650c592eb694000404a0e066e41df28be1f || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/google/cloud/LICENSE %{buildroot}/usr/share/package-licenses/ansible/8624bcdae55baeef00cd11d5dfcfa60f68710a02 || :
-cp %{_builddir}/ansible-%{version}/ansible_collections/google/cloud/roles/gcloud/LICENSE %{buildroot}/usr/share/package-licenses/ansible/33ab7ec85799c08d1863b02a5aa30c32fb799dca || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/grafana/grafana/LICENSE %{buildroot}/usr/share/package-licenses/ansible/7bc5474bacf20ef085e04ded37c5e604c197cf07 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/hetzner/hcloud/COPYING %{buildroot}/usr/share/package-licenses/ansible/338650eb7a42dd9bc1f1c6961420f2633b24932d || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/ibm/qradar/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615 || :
@@ -905,7 +916,7 @@ cp %{_builddir}/ansible-%{version}/ansible_collections/vmware/vmware_rest/LICENS
 cp %{_builddir}/ansible-%{version}/ansible_collections/vultr/cloud/COPYING %{buildroot}/usr/share/package-licenses/ansible/a6adc13d0c809ab8cb68e6e3b6eb7571bd0e2920 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/vyos/vyos/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615 || :
 cp %{_builddir}/ansible-%{version}/debian/copyright %{buildroot}/usr/share/package-licenses/ansible/df7eb10107eae3c1fc58f5cfe07af25d35959132 || :
-python3 -tt setup.py build  install --root=%{buildroot}
+pip install --root=%{buildroot} --no-deps --ignore-installed dist/*.whl
 pypi-dep-fix.py %{buildroot} ansible-core
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
@@ -916,7 +927,7 @@ export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
 export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
 export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3 "
 export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3 "
-python3 -tt setup.py build install --root=%{buildroot}-v3
+pip install --root=%{buildroot}-v3 --no-deps --ignore-installed dist/*.whl
 popd
 /usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
@@ -937,7 +948,6 @@ popd
 /usr/share/package-licenses/ansible/2e71dbd548f00d2365bdfc32072909fbc5703db6
 /usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
 /usr/share/package-licenses/ansible/338650eb7a42dd9bc1f1c6961420f2633b24932d
-/usr/share/package-licenses/ansible/33ab7ec85799c08d1863b02a5aa30c32fb799dca
 /usr/share/package-licenses/ansible/37cfd8ca335069ea657b6cfd2eac89cdd2954561
 /usr/share/package-licenses/ansible/48f08e3492b2d97883a8f5d1f7b92b7d30f11b2c
 /usr/share/package-licenses/ansible/7bc5474bacf20ef085e04ded37c5e604c197cf07
