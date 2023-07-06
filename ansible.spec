@@ -4,10 +4,10 @@
 # Using build pattern: pyproject
 #
 Name     : ansible
-Version  : 8.0.0
-Release  : 166
-URL      : https://files.pythonhosted.org/packages/bf/d2/41bfb43774c98b6df721170ec2070d517e7ee20ff106edeaa2e29dc0fa7e/ansible-8.0.0.tar.gz
-Source0  : https://files.pythonhosted.org/packages/bf/d2/41bfb43774c98b6df721170ec2070d517e7ee20ff106edeaa2e29dc0fa7e/ansible-8.0.0.tar.gz
+Version  : 8.1.0
+Release  : 167
+URL      : https://files.pythonhosted.org/packages/87/d7/322dd9d88261e56862ade2f9b9c125d0de648857e755d7177500272d2e05/ansible-8.1.0.tar.gz
+Source0  : https://files.pythonhosted.org/packages/87/d7/322dd9d88261e56862ade2f9b9c125d0de648857e755d7177500272d2e05/ansible-8.1.0.tar.gz
 Summary  : Radically simple IT automation
 Group    : Development/Tools
 License  : Apache-2.0 BSD-2-Clause BSD-3-Clause GPL-2.0 GPL-3.0 GPL-3.0+ MIT MPL-2.0 MPL-2.0-no-copyleft-exception Python-2.0
@@ -16,9 +16,9 @@ Requires: ansible-license = %{version}-%{release}
 Requires: ansible-python = %{version}-%{release}
 Requires: ansible-python3 = %{version}-%{release}
 BuildRequires : buildreq-distutils3
-BuildRequires : pypi(boto3)
-BuildRequires : pypi(botocore)
+BuildRequires : pypi(paramiko)
 BuildRequires : pypi(setuptools)
+BuildRequires : pypi(six)
 # Suppress stripping binaries
 %define __strip /bin/true
 %define debug_package %{nil}
@@ -59,18 +59,18 @@ Requires: python3-core
 Provides: pypi(ansible)
 Requires: ansible-core
 Requires: pypi(ansible_core)
-Requires: pypi(boto3)
-Requires: pypi(botocore)
+Requires: pypi(paramiko)
+Requires: pypi(six)
 
 %description python3
 python3 components for the ansible package.
 
 
 %prep
-%setup -q -n ansible-8.0.0
-cd %{_builddir}/ansible-8.0.0
+%setup -q -n ansible-8.1.0
+cd %{_builddir}/ansible-8.1.0
 pushd ..
-cp -a ansible-8.0.0 buildavx2
+cp -a ansible-8.1.0 buildavx2
 popd
 
 %build
@@ -78,7 +78,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1685571698
+export SOURCE_DATE_EPOCH=1688659837
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -220,6 +220,7 @@ cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/i
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/one_template/files/testhost/tmp/opennebula-fixtures.json.gz.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/pkgng/templates/MANIFEST.json.j2.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/setup_flatpak_remote/files/repo.tar.xz.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/setup_openldap/files/cert_cnconfig.ldif.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/setup_openldap/files/initial_config.ldif.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/setup_openldap/files/rootpw_cnconfig.ldif.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/general/tests/integration/targets/setup_postgresql_db/files/dummy.control.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
@@ -526,6 +527,7 @@ cp %{_builddir}/ansible-%{version}/ansible_collections/community/routeros/tests/
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/routeros/tests/sanity/ignore-2.13.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/routeros/tests/sanity/ignore-2.14.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/routeros/tests/sanity/ignore-2.15.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/routeros/tests/sanity/ignore-2.16.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/routeros/tests/sanity/ignore-2.9.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/routeros/tests/unit/plugins/modules/fixtures/facts/export.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/routeros/tests/unit/plugins/modules/fixtures/facts/export_verbose.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
@@ -600,6 +602,7 @@ cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/sani
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/sanity/ignore-2.13.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/sanity/ignore-2.14.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/sanity/ignore-2.15.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/sanity/ignore-2.16.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/sops/tests/sanity/ignore-2.9.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/vmware/COPYING %{buildroot}/usr/share/package-licenses/ansible/338650eb7a42dd9bc1f1c6961420f2633b24932d || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/vmware/LICENSE %{buildroot}/usr/share/package-licenses/ansible/338650eb7a42dd9bc1f1c6961420f2633b24932d || :
