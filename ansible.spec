@@ -4,10 +4,10 @@
 # Using build pattern: pyproject
 #
 Name     : ansible
-Version  : 8.1.0
-Release  : 167
-URL      : https://files.pythonhosted.org/packages/87/d7/322dd9d88261e56862ade2f9b9c125d0de648857e755d7177500272d2e05/ansible-8.1.0.tar.gz
-Source0  : https://files.pythonhosted.org/packages/87/d7/322dd9d88261e56862ade2f9b9c125d0de648857e755d7177500272d2e05/ansible-8.1.0.tar.gz
+Version  : 8.2.0
+Release  : 168
+URL      : https://files.pythonhosted.org/packages/dd/8d/cb83551686b964377110e215740a75dca253100ef57d4b11f65613c83e13/ansible-8.2.0.tar.gz
+Source0  : https://files.pythonhosted.org/packages/dd/8d/cb83551686b964377110e215740a75dca253100ef57d4b11f65613c83e13/ansible-8.2.0.tar.gz
 Summary  : Radically simple IT automation
 Group    : Development/Tools
 License  : Apache-2.0 BSD-2-Clause BSD-3-Clause GPL-2.0 GPL-3.0 GPL-3.0+ MIT MPL-2.0 MPL-2.0-no-copyleft-exception Python-2.0
@@ -67,10 +67,10 @@ python3 components for the ansible package.
 
 
 %prep
-%setup -q -n ansible-8.1.0
-cd %{_builddir}/ansible-8.1.0
+%setup -q -n ansible-8.2.0
+cd %{_builddir}/ansible-8.2.0
 pushd ..
-cp -a ansible-8.1.0 buildavx2
+cp -a ansible-8.2.0 buildavx2
 popd
 
 %build
@@ -78,7 +78,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1688659837
+export SOURCE_DATE_EPOCH=1689690464
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -497,6 +497,7 @@ cp %{_builddir}/ansible-%{version}/ansible_collections/community/hrobot/tests/sa
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/hrobot/tests/sanity/ignore-2.13.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/hrobot/tests/sanity/ignore-2.14.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/hrobot/tests/sanity/ignore-2.15.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
+cp %{_builddir}/ansible-%{version}/ansible_collections/community/hrobot/tests/sanity/ignore-2.16.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/hrobot/tests/sanity/ignore-2.9.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/libvirt/COPYING %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/mongodb/COPYING %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615 || :
@@ -627,7 +628,7 @@ cp %{_builddir}/ansible-%{version}/ansible_collections/frr/frr/LICENSE %{buildro
 cp %{_builddir}/ansible-%{version}/ansible_collections/gluster/gluster/LICENSE %{buildroot}/usr/share/package-licenses/ansible/e4851650c592eb694000404a0e066e41df28be1f || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/google/cloud/LICENSE %{buildroot}/usr/share/package-licenses/ansible/8624bcdae55baeef00cd11d5dfcfa60f68710a02 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/grafana/grafana/LICENSE %{buildroot}/usr/share/package-licenses/ansible/7bc5474bacf20ef085e04ded37c5e604c197cf07 || :
-cp %{_builddir}/ansible-%{version}/ansible_collections/hetzner/hcloud/COPYING %{buildroot}/usr/share/package-licenses/ansible/338650eb7a42dd9bc1f1c6961420f2633b24932d || :
+cp %{_builddir}/ansible-%{version}/ansible_collections/hetzner/hcloud/COPYING %{buildroot}/usr/share/package-licenses/ansible/8624bcdae55baeef00cd11d5dfcfa60f68710a02 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/ibm/qradar/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/ibm/spectrum_virtualize/LICENSE %{buildroot}/usr/share/package-licenses/ansible/7bc5474bacf20ef085e04ded37c5e604c197cf07 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/infinidat/infinibox/LICENSE %{buildroot}/usr/share/package-licenses/ansible/b04f164721ecb9138e854f0c541806c85c2d5e56 || :
