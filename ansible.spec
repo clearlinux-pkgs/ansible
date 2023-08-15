@@ -4,10 +4,10 @@
 # Using build pattern: pyproject
 #
 Name     : ansible
-Version  : 8.2.0
-Release  : 168
-URL      : https://files.pythonhosted.org/packages/dd/8d/cb83551686b964377110e215740a75dca253100ef57d4b11f65613c83e13/ansible-8.2.0.tar.gz
-Source0  : https://files.pythonhosted.org/packages/dd/8d/cb83551686b964377110e215740a75dca253100ef57d4b11f65613c83e13/ansible-8.2.0.tar.gz
+Version  : 8.3.0
+Release  : 169
+URL      : https://files.pythonhosted.org/packages/3b/e5/ce68986eae98f0ef98120c4e77e3ef6420f4cec1bbdbfb778238d09e40aa/ansible-8.3.0.tar.gz
+Source0  : https://files.pythonhosted.org/packages/3b/e5/ce68986eae98f0ef98120c4e77e3ef6420f4cec1bbdbfb778238d09e40aa/ansible-8.3.0.tar.gz
 Summary  : Radically simple IT automation
 Group    : Development/Tools
 License  : Apache-2.0 BSD-2-Clause BSD-3-Clause GPL-2.0 GPL-3.0 GPL-3.0+ MIT MPL-2.0 MPL-2.0-no-copyleft-exception Python-2.0
@@ -67,10 +67,10 @@ python3 components for the ansible package.
 
 
 %prep
-%setup -q -n ansible-8.2.0
-cd %{_builddir}/ansible-8.2.0
+%setup -q -n ansible-8.3.0
+cd %{_builddir}/ansible-8.3.0
 pushd ..
-cp -a ansible-8.2.0 buildavx2
+cp -a ansible-8.3.0 buildavx2
 popd
 
 %build
@@ -78,7 +78,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1689690464
+export SOURCE_DATE_EPOCH=1692113155
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -666,6 +666,7 @@ cp %{_builddir}/ansible-%{version}/ansible_collections/purestorage/fusion/COPYIN
 cp %{_builddir}/ansible-%{version}/ansible_collections/sensu/sensu_go/COPYING %{buildroot}/usr/share/package-licenses/ansible/338650eb7a42dd9bc1f1c6961420f2633b24932d || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/splunk/es/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/t_systems_mms/icinga_director/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615 || :
+cp %{_builddir}/ansible-%{version}/ansible_collections/telekom_mms/icinga_director/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/theforeman/foreman/LICENSE %{buildroot}/usr/share/package-licenses/ansible/f7f48fed63d86ec332208665c10f97d088f8692f || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/theforeman/foreman/PSF-license.txt %{buildroot}/usr/share/package-licenses/ansible/e9665a5e46702a4080c47049e29edf05eb70bfd6 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/vmware/vmware_rest/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615 || :
