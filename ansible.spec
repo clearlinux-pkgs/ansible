@@ -4,10 +4,10 @@
 # Using build pattern: pyproject
 #
 Name     : ansible
-Version  : 8.3.0
-Release  : 169
-URL      : https://files.pythonhosted.org/packages/3b/e5/ce68986eae98f0ef98120c4e77e3ef6420f4cec1bbdbfb778238d09e40aa/ansible-8.3.0.tar.gz
-Source0  : https://files.pythonhosted.org/packages/3b/e5/ce68986eae98f0ef98120c4e77e3ef6420f4cec1bbdbfb778238d09e40aa/ansible-8.3.0.tar.gz
+Version  : 8.4.0
+Release  : 170
+URL      : https://files.pythonhosted.org/packages/06/27/9889d6cb25bc347d7e811e8a4e6fb568537e038ac0a73e6f48d2b4aea1e4/ansible-8.4.0.tar.gz
+Source0  : https://files.pythonhosted.org/packages/06/27/9889d6cb25bc347d7e811e8a4e6fb568537e038ac0a73e6f48d2b4aea1e4/ansible-8.4.0.tar.gz
 Summary  : Radically simple IT automation
 Group    : Development/Tools
 License  : Apache-2.0 BSD-2-Clause BSD-3-Clause GPL-2.0 GPL-3.0 GPL-3.0+ MIT MPL-2.0 MPL-2.0-no-copyleft-exception Python-2.0
@@ -67,10 +67,10 @@ python3 components for the ansible package.
 
 
 %prep
-%setup -q -n ansible-8.3.0
-cd %{_builddir}/ansible-8.3.0
+%setup -q -n ansible-8.4.0
+cd %{_builddir}/ansible-8.4.0
 pushd ..
-cp -a ansible-8.3.0 buildavx2
+cp -a ansible-8.4.0 buildavx2
 popd
 
 %build
@@ -78,7 +78,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1692113155
+export SOURCE_DATE_EPOCH=1694528762
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -126,7 +126,7 @@ cp %{_builddir}/ansible-%{version}/ansible_collections/cisco/intersight/LICENSE.
 cp %{_builddir}/ansible-%{version}/ansible_collections/cisco/ios/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/cisco/iosxr/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/cisco/ise/LICENSE %{buildroot}/usr/share/package-licenses/ansible/e197a1b2f214135d9b6716eab7f07c30511063b1 || :
-cp %{_builddir}/ansible-%{version}/ansible_collections/cisco/meraki/COPYING %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615 || :
+cp %{_builddir}/ansible-%{version}/ansible_collections/cisco/meraki/LICENSE %{buildroot}/usr/share/package-licenses/ansible/e197a1b2f214135d9b6716eab7f07c30511063b1 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/cisco/mso/LICENSE %{buildroot}/usr/share/package-licenses/ansible/2e71dbd548f00d2365bdfc32072909fbc5703db6 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/cisco/nso/LICENSE %{buildroot}/usr/share/package-licenses/ansible/37cfd8ca335069ea657b6cfd2eac89cdd2954561 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/cisco/nxos/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615 || :
