@@ -5,7 +5,7 @@
 #
 Name     : ansible
 Version  : 8.5.0
-Release  : 171
+Release  : 172
 URL      : https://files.pythonhosted.org/packages/37/6e/53718ca07b7c46ac4777f9d1b13480cbe0b04f6a686c8436029f00ce25be/ansible-8.5.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/37/6e/53718ca07b7c46ac4777f9d1b13480cbe0b04f6a686c8436029f00ce25be/ansible-8.5.0.tar.gz
 Summary  : Radically simple IT automation
