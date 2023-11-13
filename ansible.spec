@@ -6,10 +6,10 @@
 # autospec commit: 250a666
 #
 Name     : ansible
-Version  : 8.6.0
-Release  : 173
-URL      : https://files.pythonhosted.org/packages/50/d4/97b8f6d10c6881c161d8677850062c9d8d4838ef8a491f34779c12253278/ansible-8.6.0.tar.gz
-Source0  : https://files.pythonhosted.org/packages/50/d4/97b8f6d10c6881c161d8677850062c9d8d4838ef8a491f34779c12253278/ansible-8.6.0.tar.gz
+Version  : 8.6.1
+Release  : 174
+URL      : https://files.pythonhosted.org/packages/f9/41/714d5a1e4d46e522df144b6745fa2002760114fd586eea8538b6e42be26c/ansible-8.6.1.tar.gz
+Source0  : https://files.pythonhosted.org/packages/f9/41/714d5a1e4d46e522df144b6745fa2002760114fd586eea8538b6e42be26c/ansible-8.6.1.tar.gz
 Summary  : Radically simple IT automation
 Group    : Development/Tools
 License  : Apache-2.0 BSD-2-Clause BSD-3-Clause GPL-2.0 GPL-3.0 GPL-3.0+ MIT MPL-2.0 MPL-2.0-no-copyleft-exception Python-2.0
@@ -69,10 +69,10 @@ python3 components for the ansible package.
 
 
 %prep
-%setup -q -n ansible-8.6.0
-cd %{_builddir}/ansible-8.6.0
+%setup -q -n ansible-8.6.1
+cd %{_builddir}/ansible-8.6.1
 pushd ..
-cp -a ansible-8.6.0 buildavx2
+cp -a ansible-8.6.1 buildavx2
 popd
 
 %build
@@ -80,7 +80,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1699384882
+export SOURCE_DATE_EPOCH=1699889415
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
