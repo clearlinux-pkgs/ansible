@@ -6,10 +6,10 @@
 # autospec commit: e661f3a
 #
 Name     : ansible
-Version  : 9.0.1
-Release  : 175
-URL      : https://files.pythonhosted.org/packages/19/17/5da525931b5867b4f542c1ef1cdc5b55d28948da7eadf650d9f0f75df0ca/ansible-9.0.1.tar.gz
-Source0  : https://files.pythonhosted.org/packages/19/17/5da525931b5867b4f542c1ef1cdc5b55d28948da7eadf650d9f0f75df0ca/ansible-9.0.1.tar.gz
+Version  : 9.1.0
+Release  : 176
+URL      : https://files.pythonhosted.org/packages/eb/ab/e6993e1608fa911ee84dd0f29f494064f3b7f4a277f99608c9421a7a5ed4/ansible-9.1.0.tar.gz
+Source0  : https://files.pythonhosted.org/packages/eb/ab/e6993e1608fa911ee84dd0f29f494064f3b7f4a277f99608c9421a7a5ed4/ansible-9.1.0.tar.gz
 Summary  : Radically simple IT automation
 Group    : Development/Tools
 License  : Apache-2.0 BSD-2-Clause BSD-3-Clause GPL-2.0 GPL-3.0 GPL-3.0+ GPL-3.0-or-later MIT MPL-2.0 MPL-2.0-no-copyleft-exception Python-2.0
@@ -69,10 +69,10 @@ python3 components for the ansible package.
 
 
 %prep
-%setup -q -n ansible-9.0.1
-cd %{_builddir}/ansible-9.0.1
+%setup -q -n ansible-9.1.0
+cd %{_builddir}/ansible-9.1.0
 pushd ..
-cp -a ansible-9.0.1 buildavx2
+cp -a ansible-9.1.0 buildavx2
 popd
 
 %build
@@ -80,7 +80,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1700669030
+export SOURCE_DATE_EPOCH=1701970635
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -646,7 +646,6 @@ cp %{_builddir}/ansible-%{version}/ansible_collections/dellemc/powerflex/LICENSE
 cp %{_builddir}/ansible-%{version}/ansible_collections/dellemc/powerflex/MODULE-LICENSE %{buildroot}/usr/share/package-licenses/ansible/7df059597099bb7dcf25d2a9aedfaf4465f72d8d || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/dellemc/unity/LICENSE %{buildroot}/usr/share/package-licenses/ansible/7bc5474bacf20ef085e04ded37c5e604c197cf07 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/dellemc/unity/MODULE-LICENSE %{buildroot}/usr/share/package-licenses/ansible/7df059597099bb7dcf25d2a9aedfaf4465f72d8d || :
-cp %{_builddir}/ansible-%{version}/ansible_collections/f5networks/f5_modules/plugins/lookup/license_hopper.py %{buildroot}/usr/share/package-licenses/ansible/22cf4767fdced6cc00395c3c56eefff73127d58c || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/fortinet/fortimanager/LICENSE %{buildroot}/usr/share/package-licenses/ansible/1de7bacb4fbbd7b6d391a69abfe174c2509ec303 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/fortinet/fortios/LICENSE %{buildroot}/usr/share/package-licenses/ansible/338650eb7a42dd9bc1f1c6961420f2633b24932d || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/frr/frr/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615 || :
@@ -722,7 +721,6 @@ popd
 %files license
 %defattr(0644,root,root,0755)
 /usr/share/package-licenses/ansible/1de7bacb4fbbd7b6d391a69abfe174c2509ec303
-/usr/share/package-licenses/ansible/22cf4767fdced6cc00395c3c56eefff73127d58c
 /usr/share/package-licenses/ansible/27b42abb6f497e50731b0e75678d25241f58bd90
 /usr/share/package-licenses/ansible/2c7ce4b4ba7a5546dc13a6282b66a2a583abe4e4
 /usr/share/package-licenses/ansible/2e71dbd548f00d2365bdfc32072909fbc5703db6
