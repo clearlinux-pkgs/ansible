@@ -6,10 +6,10 @@
 # autospec commit: fbcebd0
 #
 Name     : ansible
-Version  : 10.0.0
-Release  : 182
-URL      : https://files.pythonhosted.org/packages/f8/f4/9b52e828afa340c7d610ff35246e89bee3ca163dd2fe021db13142b2830c/ansible-10.0.0.tar.gz
-Source0  : https://files.pythonhosted.org/packages/f8/f4/9b52e828afa340c7d610ff35246e89bee3ca163dd2fe021db13142b2830c/ansible-10.0.0.tar.gz
+Version  : 10.0.1
+Release  : 183
+URL      : https://files.pythonhosted.org/packages/96/78/95e152c98f1b9349854cf8f4a9cea1d6ad55bf132e66a81207c650f92d01/ansible-10.0.1.tar.gz
+Source0  : https://files.pythonhosted.org/packages/96/78/95e152c98f1b9349854cf8f4a9cea1d6ad55bf132e66a81207c650f92d01/ansible-10.0.1.tar.gz
 Summary  : Radically simple IT automation
 Group    : Development/Tools
 License  : Apache-2.0 BSD-2-Clause BSD-3-Clause GPL-3.0 GPL-3.0+ GPL-3.0-or-later MIT MPL-2.0 MPL-2.0-no-copyleft-exception Python-2.0
@@ -69,10 +69,10 @@ python3 components for the ansible package.
 
 
 %prep
-%setup -q -n ansible-10.0.0
-cd %{_builddir}/ansible-10.0.0
+%setup -q -n ansible-10.0.1
+cd %{_builddir}/ansible-10.0.1
 pushd ..
-cp -a ansible-10.0.0 buildavx2
+cp -a ansible-10.0.1 buildavx2
 popd
 
 %build
@@ -80,7 +80,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1717546054
+export SOURCE_DATE_EPOCH=1717689335
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -677,14 +677,9 @@ cp %{_builddir}/ansible-%{version}/ansible_collections/ibm/storage_virtualize/LI
 cp %{_builddir}/ansible-%{version}/ansible_collections/infinidat/infinibox/LICENSE %{buildroot}/usr/share/package-licenses/ansible/b04f164721ecb9138e854f0c541806c85c2d5e56 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/infoblox/nios_modules/COPYING %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/inspur/ispim/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615 || :
-cp %{_builddir}/ansible-%{version}/ansible_collections/inspur/ispim/venv/Lib/site-packages/pip-21.1.2.dist-info/LICENSE.txt %{buildroot}/usr/share/package-licenses/ansible/f9fe0a71ce407d6b1fd2b78044794af8a1e5c47e || :
-cp %{_builddir}/ansible-%{version}/ansible_collections/inspur/ispim/venv/Lib/site-packages/setuptools-57.0.0.dist-info/LICENSE %{buildroot}/usr/share/package-licenses/ansible/8e6689d37f82d5617b7f7f7232c94024d41066d1 || :
-cp %{_builddir}/ansible-%{version}/ansible_collections/inspur/ispim/venv/Lib/site-packages/wheel-0.36.2.dist-info/LICENSE.txt %{buildroot}/usr/share/package-licenses/ansible/53aa128e9d6387e9bb9d945fdcbf1ab4d003baed || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/inspur/sm/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/junipernetworks/junos/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615 || :
-cp %{_builddir}/ansible-%{version}/ansible_collections/kaytus/ksmanage/venv/Lib/site-packages/pip-21.1.2.dist-info/LICENSE.txt %{buildroot}/usr/share/package-licenses/ansible/f9fe0a71ce407d6b1fd2b78044794af8a1e5c47e || :
-cp %{_builddir}/ansible-%{version}/ansible_collections/kaytus/ksmanage/venv/Lib/site-packages/setuptools-57.0.0.dist-info/LICENSE %{buildroot}/usr/share/package-licenses/ansible/8e6689d37f82d5617b7f7f7232c94024d41066d1 || :
-cp %{_builddir}/ansible-%{version}/ansible_collections/kaytus/ksmanage/venv/Lib/site-packages/wheel-0.36.2.dist-info/LICENSE.txt %{buildroot}/usr/share/package-licenses/ansible/53aa128e9d6387e9bb9d945fdcbf1ab4d003baed || :
+cp %{_builddir}/ansible-%{version}/ansible_collections/kaytus/ksmanage/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/kubernetes/core/LICENSE %{buildroot}/usr/share/package-licenses/ansible/7bc5474bacf20ef085e04ded37c5e604c197cf07 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/kubernetes/core/PSF-license.txt %{buildroot}/usr/share/package-licenses/ansible/e9665a5e46702a4080c47049e29edf05eb70bfd6 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/lowlydba/sqlserver/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615 || :
@@ -731,47 +726,6 @@ FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS -march=x86-64-v3 "
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS -march=x86-64-v3 "
 python3 -m installer --destdir=%{buildroot}-v3 dist/*.whl
 popd
-## Remove excluded files
-rm -f %{buildroot}*/usr/lib/python3.12/site-packages/ansible_collections/inspur/ispim/venv/Lib/site-packages/pip/_vendor/distlib/t32.exe
-rm -f %{buildroot}*/usr/lib/python3.12/site-packages/ansible_collections/inspur/ispim/venv/Lib/site-packages/pip/_vendor/distlib/t64.exe
-rm -f %{buildroot}*/usr/lib/python3.12/site-packages/ansible_collections/inspur/ispim/venv/Lib/site-packages/pip/_vendor/distlib/w32.exe
-rm -f %{buildroot}*/usr/lib/python3.12/site-packages/ansible_collections/inspur/ispim/venv/Lib/site-packages/pip/_vendor/distlib/w64.exe
-rm -f %{buildroot}*/usr/lib/python3.12/site-packages/ansible_collections/inspur/ispim/venv/Lib/site-packages/setuptools/cli-32.exe
-rm -f %{buildroot}*/usr/lib/python3.12/site-packages/ansible_collections/inspur/ispim/venv/Lib/site-packages/setuptools/cli-64.exe
-rm -f %{buildroot}*/usr/lib/python3.12/site-packages/ansible_collections/inspur/ispim/venv/Lib/site-packages/setuptools/cli.exe
-rm -f %{buildroot}*/usr/lib/python3.12/site-packages/ansible_collections/inspur/ispim/venv/Lib/site-packages/setuptools/gui-32.exe
-rm -f %{buildroot}*/usr/lib/python3.12/site-packages/ansible_collections/inspur/ispim/venv/Lib/site-packages/setuptools/gui-64.exe
-rm -f %{buildroot}*/usr/lib/python3.12/site-packages/ansible_collections/inspur/ispim/venv/Lib/site-packages/setuptools/gui.exe
-rm -f %{buildroot}*/usr/lib/python3.12/site-packages/ansible_collections/inspur/ispim/venv/Scripts/pip-3.7.exe
-rm -f %{buildroot}*/usr/lib/python3.12/site-packages/ansible_collections/inspur/ispim/venv/Scripts/pip.exe
-rm -f %{buildroot}*/usr/lib/python3.12/site-packages/ansible_collections/inspur/ispim/venv/Scripts/pip3.7.exe
-rm -f %{buildroot}*/usr/lib/python3.12/site-packages/ansible_collections/inspur/ispim/venv/Scripts/pip3.exe
-rm -f %{buildroot}*/usr/lib/python3.12/site-packages/ansible_collections/inspur/ispim/venv/Scripts/python.exe
-rm -f %{buildroot}*/usr/lib/python3.12/site-packages/ansible_collections/inspur/ispim/venv/Scripts/pythonw.exe
-rm -f %{buildroot}*/usr/lib/python3.12/site-packages/ansible_collections/inspur/ispim/venv/Scripts/wheel-3.7.exe
-rm -f %{buildroot}*/usr/lib/python3.12/site-packages/ansible_collections/inspur/ispim/venv/Scripts/wheel.exe
-rm -f %{buildroot}*/usr/lib/python3.12/site-packages/ansible_collections/inspur/ispim/venv/Scripts/wheel3.7.exe
-rm -f %{buildroot}*/usr/lib/python3.12/site-packages/ansible_collections/inspur/ispim/venv/Scripts/wheel3.exe
-rm -f %{buildroot}*/usr/lib/python3.12/site-packages/ansible_collections/kaytus/ksmanage/venv/Lib/site-packages/pip/_vendor/distlib/t32.exe
-rm -f %{buildroot}*/usr/lib/python3.12/site-packages/ansible_collections/kaytus/ksmanage/venv/Lib/site-packages/pip/_vendor/distlib/t64.exe
-rm -f %{buildroot}*/usr/lib/python3.12/site-packages/ansible_collections/kaytus/ksmanage/venv/Lib/site-packages/pip/_vendor/distlib/w32.exe
-rm -f %{buildroot}*/usr/lib/python3.12/site-packages/ansible_collections/kaytus/ksmanage/venv/Lib/site-packages/pip/_vendor/distlib/w64.exe
-rm -f %{buildroot}*/usr/lib/python3.12/site-packages/ansible_collections/kaytus/ksmanage/venv/Lib/site-packages/setuptools/cli-32.exe
-rm -f %{buildroot}*/usr/lib/python3.12/site-packages/ansible_collections/kaytus/ksmanage/venv/Lib/site-packages/setuptools/cli-64.exe
-rm -f %{buildroot}*/usr/lib/python3.12/site-packages/ansible_collections/kaytus/ksmanage/venv/Lib/site-packages/setuptools/cli.exe
-rm -f %{buildroot}*/usr/lib/python3.12/site-packages/ansible_collections/kaytus/ksmanage/venv/Lib/site-packages/setuptools/gui-32.exe
-rm -f %{buildroot}*/usr/lib/python3.12/site-packages/ansible_collections/kaytus/ksmanage/venv/Lib/site-packages/setuptools/gui-64.exe
-rm -f %{buildroot}*/usr/lib/python3.12/site-packages/ansible_collections/kaytus/ksmanage/venv/Lib/site-packages/setuptools/gui.exe
-rm -f %{buildroot}*/usr/lib/python3.12/site-packages/ansible_collections/kaytus/ksmanage/venv/Scripts/pip-3.7.exe
-rm -f %{buildroot}*/usr/lib/python3.12/site-packages/ansible_collections/kaytus/ksmanage/venv/Scripts/pip.exe
-rm -f %{buildroot}*/usr/lib/python3.12/site-packages/ansible_collections/kaytus/ksmanage/venv/Scripts/pip3.7.exe
-rm -f %{buildroot}*/usr/lib/python3.12/site-packages/ansible_collections/kaytus/ksmanage/venv/Scripts/pip3.exe
-rm -f %{buildroot}*/usr/lib/python3.12/site-packages/ansible_collections/kaytus/ksmanage/venv/Scripts/python.exe
-rm -f %{buildroot}*/usr/lib/python3.12/site-packages/ansible_collections/kaytus/ksmanage/venv/Scripts/pythonw.exe
-rm -f %{buildroot}*/usr/lib/python3.12/site-packages/ansible_collections/kaytus/ksmanage/venv/Scripts/wheel-3.7.exe
-rm -f %{buildroot}*/usr/lib/python3.12/site-packages/ansible_collections/kaytus/ksmanage/venv/Scripts/wheel.exe
-rm -f %{buildroot}*/usr/lib/python3.12/site-packages/ansible_collections/kaytus/ksmanage/venv/Scripts/wheel3.7.exe
-rm -f %{buildroot}*/usr/lib/python3.12/site-packages/ansible_collections/kaytus/ksmanage/venv/Scripts/wheel3.exe
 /usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
@@ -789,13 +743,11 @@ rm -f %{buildroot}*/usr/lib/python3.12/site-packages/ansible_collections/kaytus/
 /usr/share/package-licenses/ansible/2e71dbd548f00d2365bdfc32072909fbc5703db6
 /usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615
 /usr/share/package-licenses/ansible/338650eb7a42dd9bc1f1c6961420f2633b24932d
-/usr/share/package-licenses/ansible/53aa128e9d6387e9bb9d945fdcbf1ab4d003baed
 /usr/share/package-licenses/ansible/7bc5474bacf20ef085e04ded37c5e604c197cf07
 /usr/share/package-licenses/ansible/7df059597099bb7dcf25d2a9aedfaf4465f72d8d
 /usr/share/package-licenses/ansible/7fd6360e370eb278e4f6298b830a6d4024667aa7
 /usr/share/package-licenses/ansible/81538fac4f7316ad68eb3218e4c73a7172aac598
 /usr/share/package-licenses/ansible/8624bcdae55baeef00cd11d5dfcfa60f68710a02
-/usr/share/package-licenses/ansible/8e6689d37f82d5617b7f7f7232c94024d41066d1
 /usr/share/package-licenses/ansible/8eb83a42d183d11f2ab1e7e2041b9762e8d935c6
 /usr/share/package-licenses/ansible/964a86ea34677b9cf55c3c92f65bf279efbb12c6
 /usr/share/package-licenses/ansible/a6adc13d0c809ab8cb68e6e3b6eb7571bd0e2920
@@ -814,7 +766,6 @@ rm -f %{buildroot}*/usr/lib/python3.12/site-packages/ansible_collections/kaytus/
 /usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502
 /usr/share/package-licenses/ansible/f7f48fed63d86ec332208665c10f97d088f8692f
 /usr/share/package-licenses/ansible/f940ee84768beeb07c1094f57531ded0f1f28d23
-/usr/share/package-licenses/ansible/f9fe0a71ce407d6b1fd2b78044794af8a1e5c47e
 
 %files python
 %defattr(-,root,root,-)
