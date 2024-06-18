@@ -6,10 +6,10 @@
 # autospec commit: fbcebd0
 #
 Name     : ansible
-Version  : 10.0.1
-Release  : 183
-URL      : https://files.pythonhosted.org/packages/96/78/95e152c98f1b9349854cf8f4a9cea1d6ad55bf132e66a81207c650f92d01/ansible-10.0.1.tar.gz
-Source0  : https://files.pythonhosted.org/packages/96/78/95e152c98f1b9349854cf8f4a9cea1d6ad55bf132e66a81207c650f92d01/ansible-10.0.1.tar.gz
+Version  : 10.1.0
+Release  : 184
+URL      : https://files.pythonhosted.org/packages/32/e8/3bbd91286c1b858afafac59a4f582c5f0344efabb4f4e013de9d1d9c21c2/ansible-10.1.0.tar.gz
+Source0  : https://files.pythonhosted.org/packages/32/e8/3bbd91286c1b858afafac59a4f582c5f0344efabb4f4e013de9d1d9c21c2/ansible-10.1.0.tar.gz
 Summary  : Radically simple IT automation
 Group    : Development/Tools
 License  : Apache-2.0 BSD-2-Clause BSD-3-Clause GPL-3.0 GPL-3.0+ GPL-3.0-or-later MIT MPL-2.0 MPL-2.0-no-copyleft-exception Python-2.0
@@ -69,10 +69,10 @@ python3 components for the ansible package.
 
 
 %prep
-%setup -q -n ansible-10.0.1
-cd %{_builddir}/ansible-10.0.1
+%setup -q -n ansible-10.1.0
+cd %{_builddir}/ansible-10.1.0
 pushd ..
-cp -a ansible-10.0.1 buildavx2
+cp -a ansible-10.1.0 buildavx2
 popd
 
 %build
@@ -80,7 +80,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1717689335
+export SOURCE_DATE_EPOCH=1718723108
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -674,6 +674,7 @@ cp %{_builddir}/ansible-%{version}/ansible_collections/hetzner/hcloud/COPYING %{
 cp %{_builddir}/ansible-%{version}/ansible_collections/ibm/qradar/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/ibm/spectrum_virtualize/LICENSE %{buildroot}/usr/share/package-licenses/ansible/7bc5474bacf20ef085e04ded37c5e604c197cf07 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/ibm/storage_virtualize/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615 || :
+cp %{_builddir}/ansible-%{version}/ansible_collections/ieisystem/inmanage/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/infinidat/infinibox/LICENSE %{buildroot}/usr/share/package-licenses/ansible/b04f164721ecb9138e854f0c541806c85c2d5e56 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/infoblox/nios_modules/COPYING %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/inspur/ispim/LICENSE %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615 || :

@@ -1,5 +1,5 @@
 PKG_NAME := ansible
-URL = https://files.pythonhosted.org/packages/96/78/95e152c98f1b9349854cf8f4a9cea1d6ad55bf132e66a81207c650f92d01/ansible-10.0.1.tar.gz
+URL = https://files.pythonhosted.org/packages/32/e8/3bbd91286c1b858afafac59a4f582c5f0344efabb4f4e013de9d1d9c21c2/ansible-10.1.0.tar.gz
 ARCHIVES = 
 
 include ../common/Makefile.common
