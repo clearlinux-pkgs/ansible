@@ -7,7 +7,7 @@
 #
 Name     : ansible
 Version  : 10.5.0
-Release  : 188
+Release  : 189
 URL      : https://files.pythonhosted.org/packages/d7/23/ae30b280ebad1f19fa012c0410aaf7d50cd741a5786bd60a2ecba42d2cd4/ansible-10.5.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/d7/23/ae30b280ebad1f19fa012c0410aaf7d50cd741a5786bd60a2ecba42d2cd4/ansible-10.5.0.tar.gz
 Summary  : Radically simple IT automation
