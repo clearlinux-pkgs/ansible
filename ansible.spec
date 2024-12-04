@@ -6,10 +6,10 @@
 # autospec commit: 5424026
 #
 Name     : ansible
-Version  : 11.0.0
-Release  : 191
-URL      : https://files.pythonhosted.org/packages/ad/81/782a5a5c344e62e66cfb0e684396dfbe14c632b0356ebf72a83838c0a484/ansible-11.0.0.tar.gz
-Source0  : https://files.pythonhosted.org/packages/ad/81/782a5a5c344e62e66cfb0e684396dfbe14c632b0356ebf72a83838c0a484/ansible-11.0.0.tar.gz
+Version  : 11.1.0
+Release  : 192
+URL      : https://files.pythonhosted.org/packages/5c/54/dc559b305948e9c234f79ef00f7aed52d7c127c8616c0c2f3f336103ccdd/ansible-11.1.0.tar.gz
+Source0  : https://files.pythonhosted.org/packages/5c/54/dc559b305948e9c234f79ef00f7aed52d7c127c8616c0c2f3f336103ccdd/ansible-11.1.0.tar.gz
 Summary  : Radically simple IT automation
 Group    : Development/Tools
 License  : Apache-2.0 BSD-2-Clause BSD-3-Clause GPL-3.0 GPL-3.0+ GPL-3.0-or-later MIT MPL-2.0 MPL-2.0-no-copyleft-exception Python-2.0
@@ -69,10 +69,10 @@ python3 components for the ansible package.
 
 
 %prep
-%setup -q -n ansible-11.0.0
-cd %{_builddir}/ansible-11.0.0
+%setup -q -n ansible-11.1.0
+cd %{_builddir}/ansible-11.1.0
 pushd ..
-cp -a ansible-11.0.0 buildavx2
+cp -a ansible-11.1.0 buildavx2
 popd
 
 %build
@@ -80,7 +80,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1732039959
+export SOURCE_DATE_EPOCH=1733323995
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -208,17 +208,12 @@ cp %{_builddir}/ansible-%{version}/ansible_collections/community/dns/tests/sanit
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/dns/tests/sanity/extra/licenses.py.license %{buildroot}/usr/share/package-licenses/ansible/dc1ce8ce177e3884fa63185447f9953cd7eff0b4 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/dns/tests/sanity/extra/no-unwanted-files.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/dns/tests/sanity/extra/update-docs-fragments.json.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
-cp %{_builddir}/ansible-%{version}/ansible_collections/community/dns/tests/sanity/ignore-2.10.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
-cp %{_builddir}/ansible-%{version}/ansible_collections/community/dns/tests/sanity/ignore-2.11.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
-cp %{_builddir}/ansible-%{version}/ansible_collections/community/dns/tests/sanity/ignore-2.12.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
-cp %{_builddir}/ansible-%{version}/ansible_collections/community/dns/tests/sanity/ignore-2.13.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/dns/tests/sanity/ignore-2.14.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/dns/tests/sanity/ignore-2.15.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/dns/tests/sanity/ignore-2.16.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/dns/tests/sanity/ignore-2.17.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/dns/tests/sanity/ignore-2.18.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/dns/tests/sanity/ignore-2.19.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
-cp %{_builddir}/ansible-%{version}/ansible_collections/community/dns/tests/sanity/ignore-2.9.txt.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/docker/CHANGELOG.md.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/docker/CHANGELOG.rst.license %{buildroot}/usr/share/package-licenses/ansible/f2129c71c684d1db7850425ea0b053f090ba6502 || :
 cp %{_builddir}/ansible-%{version}/ansible_collections/community/docker/COPYING %{buildroot}/usr/share/package-licenses/ansible/31a3d460bb3c7d98845187c716a30db81c44b615 || :
