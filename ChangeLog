@@ -2,8 +2,8 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # SPDX-FileCopyrightText: Ansible Project, 2020
 
-ansible (11.4.0-1) unstable; urgency=medium
+ansible (11.5.0-1) unstable; urgency=medium
 
-  * Ansible 11.4.0 release
+  * Ansible 11.5.0 release
 
- -- Red Hat, Inc. <info@ansible.com>  Tue, 25 Mar 2025 18:51:29 +0000
+ -- Red Hat, Inc. <info@ansible.com>  Tue, 22 Apr 2025 14:42:37 +0000
